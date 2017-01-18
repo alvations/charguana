@@ -18,6 +18,8 @@ Usage
 ====
 
 ```python
+from charguana.cjk import get_charset
+
 # Hiragana.
 >>> ''.join(list(get_charset('hiragana')))
 '\u3040ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖ\u3097\u3098゙゚゛゜ゝゞゟ'
