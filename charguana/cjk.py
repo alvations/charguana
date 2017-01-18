@@ -1,6 +1,8 @@
-# See https://goo.gl/MxONLX
+# -*- coding: utf-8 -*-
 
-import sys
+"""
+Character Vommitting. See https://goo.gl/MxONLX
+"""
 
 cjk_unified_part1 = u'\u4E00', u'\u62FF'
 cjk_unified_part2 = u'\u6300', u'\u77FF'
@@ -87,17 +89,21 @@ def get_chars_between(start, end):
     for i in range(ord(start), ord(end)+1):
         yield chr(i)
 
-def all_cjk_chars(lang_encoding):
-    encodings = {'han_utf8': han_utf8, 'han_utf16': han_utf16,
-                 'ko': kor_utf8, 'ja': jap_utf8, 'zh': han_utf8,
-                 'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8))
-                 }
 
-    for start, end in encodings[lang_encoding]:
+def get_charset(charset_name):
+    charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
+                'japanese': jap_utf8, 'ja': jap_utf8, 'jp': jap_utf8,
+                'korean': kor_utf8, 'ko':kor_utf8, 'kr':kor_utf8,
+                'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8)),
+                'hiragana': [hiragana], 'katakana': [katakana],
+                'romaji': [romanji], 'punctuation': [cjk_symbols_punctuations],
+                'bopomofo': [bopomofo]
+                }
+    for start, end in charsets[charset_name]:
         for char in get_chars_between(start, end):
             yield char
 
 #with open('output.txt', 'w') as fout:
 #    print( ''.join(list(all_cjk_chars(sys.argv[1]))) , file=fout)
 
-print( ''.join(list(all_cjk_chars(sys.argv[1]))) )
+#print( ''.join(list(all_cjk_chars(sys.argv[1]))) )
