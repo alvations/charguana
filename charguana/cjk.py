@@ -96,7 +96,7 @@ def get_charset(charset_name):
                 'korean': kor_utf8, 'ko':kor_utf8, 'kr':kor_utf8,
                 'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8)),
                 'hiragana': [hiragana], 'katakana': [katakana],
-                'romaji': [romanji], 'punctuation': [cjk_symbols_punctuations],
+                'romanji': [romanji], 'punctuation': [cjk_symbols_punctuations],
                 'bopomofo': [bopomofo]
                 }
     for start, end in charsets[charset_name]:
