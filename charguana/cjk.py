@@ -103,6 +103,9 @@ def get_charset(charset_name):
         for char in get_chars_between(start, end):
             yield char
 
+def islang(string, charset):
+    return any(set(string).intersection(charset))
+
 #with open('output.txt', 'w') as fout:
 #    print( ''.join(list(all_cjk_chars(sys.argv[1]))) , file=fout)
 
