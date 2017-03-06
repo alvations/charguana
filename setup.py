@@ -4,7 +4,7 @@ setup(
   name = 'charguana',
   packages = ['charguana'], 
   version = '0.1.4',
-  description = 'A character vommitting library.',
+  description = 'A character vomiting library.',
   author = 'Liling Tan',
   license = 'MIT',
   url = 'https://github.com/alvations/charguana',
