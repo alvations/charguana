@@ -1,7 +1,7 @@
 Charguana
 ====
 
-A library for *"character vommitting"*. 
+A library for *"character vommitting"*.
 
 Only works in `Python3`
 
@@ -17,8 +17,10 @@ pip3 install charguana
 Usage
 ====
 
+**CJK characters**:
+
 ```python
-from charguana.cjk import get_charset
+>>> from charguana import get_charset
 
 # Hiragana.
 >>> ''.join(list(get_charset('hiragana')))
@@ -42,7 +44,7 @@ from charguana.cjk import get_charset
 
 
 # Chinese.
->>> ''.join(list(get_charset('chinese'))) == ''.join(list(get_charset('zh'))) 
+>>> ''.join(list(get_charset('chinese'))) == ''.join(list(get_charset('zh')))
 True
 >>> ''.join(list(get_charset('zh'))) == ''.join(list(get_charset('cn')))
 True
@@ -61,4 +63,44 @@ True
 
 # All Chinese, Korean, Japanese and Romanji.
 >>> ''.join(list(get_charset('cjk')))
+```
+
+
+**Perluniprops Characters**:
+
+
+```python
+>>> from charguana import get_charset
+
+# Open Punctuation.
+>>> ''.join(get_charset('Open_Punctuation'))
+'([{༺༼᚛‚„⁅⁽₍〈❨❪❬❮❰❲❴⟅⟦⟨⟪⟬⟮⦃⦅⦇⦉⦋⦍⦏⦑⦓⦕⦗⧘⧚⧼⸢⸤⸦⸨〈《「『【〔〖〘〚〝﴾︗︵︷︹︻︽︿﹁﹃﹇﹙﹛﹝（［｛｟｢'
+
+# Close Punctuation.
+>>> ''.join(get_charset('Close_Punctuation'))
+')]}༻༽᚜⁆⁾₎〉❩❫❭❯❱❳❵⟆⟧⟩⟫⟭⟯⦄⦆⦈⦊⦌⦎⦐⦒⦔⦖⦘⧙⧛⧽⸣⸥⸧⸩〉》」』】〕〗〙〛〞〟﴿︘︶︸︺︼︾﹀﹂﹄﹈﹚﹜﹞）］｝｠｣'
+
+# Currency Symbols.
+>>> ''.join(get_charset('Currency_Symbol'))
+'$¢£¤¥֏؋৲৳৻૱௹฿៛₠₡₢₣₤₥₦₧₨₩₪₫€₭₮₯₰₱₲₳₴₵₶₷₸₹₺꠸﷼﹩＄￠￡￥￦'
+
+# Numbers.
+>>> ''.join(list(get_charset('IsN'))[:50])
+'0123456789²³¹¼½¾٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹߀߁߂߃߄߅߆߇߈߉०१२३'
+
+# Alphabetic
+>>> ''.join(list(get_charset('IsAlpha'))[:50])
+'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx'
+
+# Lowercase.
+>>> ''.join(list(get_charset('IsLower'))[:50])
+'abcdefghijklmnopqrstuvwxyzªµºßàáâãäåæçèéêëìíîïðñòó'
+
+# Uppercase.
+
+>>> ''.join(list(get_charset('IsUpper'))[:50])
+'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØ'
+# Alphanumeric
+>>> ''.join(list(get_charset('IsAlnum'))[:50])
+'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmn'
 ```

@@ -34,11 +34,9 @@ cjk_compat_forms = u'\uFE30', u'\uFE4F'
 enclosed_ideograph_supplement = u'\U0001F200', u'\U0001F2FF'
 cjk_compat_ideographs_supplement = u'\U0002F800', u'\U0002FA1F'
 
-
 hiragana =  u'\u3040', u'\u309F'
 katakana =  u'\u30A0', u'\u30FF'
 romanji =   u'\uFF00', u'\uFFEF' # Romanji with half-width katakan.
-
 
 hangul_syllables =   u'\uAC00', u'\uD7AF'
 hangul_jamo =        u'\u1100', u'\u11FF'
@@ -84,28 +82,6 @@ kor_utf8 = [hangul_syllables, hangul_jamo, hangul_compat_jamo,
             hangul_jamo_ext_a, hangul_jamo_ext_b,
             cjk_symbols_punctuations, romanji]
 
-
-def get_chars_between(start, end):
-    for i in range(ord(start), ord(end)+1):
-        yield chr(i)
-
-
-def get_charset(charset_name):
-    charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
-                'japanese': jap_utf8, 'ja': jap_utf8, 'jp': jap_utf8,
-                'hiragana': [hiragana], 'katakana': [katakana],
-                'korean': kor_utf8, 'ko':kor_utf8, 'kr':kor_utf8,
-                'hangul_syllables': [hangul_syllables], 'hangul_jamo': [hangul_jamo],
-                'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8)),
-                'romanji': [romanji], 'punctuation': [cjk_symbols_punctuations],
-                'bopomofo': [bopomofo]
-                }
-    for start, end in charsets[charset_name]:
-        for char in get_chars_between(start, end):
-            yield char
-
-def islang(string, charset):
-    return any(set(string).intersection(charset))
 
 #with open('output.txt', 'w') as fout:
 #    print( ''.join(list(all_cjk_chars(sys.argv[1]))) , file=fout)
