@@ -55,7 +55,7 @@ han_utf8 = [cjk_unified_part1, cjk_unified_part2, cjk_unified_part3,
             cjk_radicals_supplements, kangxi_radicals,
             ideographic_desciption_chars, cjk_symbols_punctuations,
             cjk_strokes, enclosed_cjk_letters_months, cjk_compat,
-            cjk_compat_ideographs, cjk_compat_forms, romanji]
+            cjk_compat_ideographs, cjk_compat_forms]
 
 # All UTF-16 Chinese character sets.
 # From https://en.wikipedia.org/wiki/CJK_Unified_Ideographs_(Unicode_block)
@@ -72,7 +72,7 @@ jap_utf8 = [hiragana, katakana,
             cjk_unified_part1, cjk_unified_part2,  # Common + Uncommon Kanji.
             cjk_unified_part3, cjk_unified_part4,  # Common + Uncommon Kanji.
             cjk_unified_ext_a,  # Rare Kanji.
-            cjk_symbols_punctuations, romanji
+            cjk_symbols_punctuations
             ]
 
 
@@ -80,7 +80,7 @@ jap_utf8 = [hiragana, katakana,
 # From https://en.wikipedia.org/wiki/Hangul
 kor_utf8 = [hangul_syllables, hangul_jamo, hangul_compat_jamo,
             hangul_jamo_ext_a, hangul_jamo_ext_b,
-            cjk_symbols_punctuations, romanji]
+            cjk_symbols_punctuations]
 
 
 #with open('output.txt', 'w') as fout:
