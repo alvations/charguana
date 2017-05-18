@@ -10,7 +10,7 @@ cjk_charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
             'hangul_syllables': [hangul_syllables], 'hangul_jamo': [hangul_jamo],
             'romanji': [romanji], 'punctuation': [cjk_symbols_punctuations],
             'bopomofo': [bopomofo],
-            'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8 + romanji)),
+            'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8 + [romanji])),
             }
 
 perluniprops_charsets = {'Close_Punctuation': close_punctuation,
