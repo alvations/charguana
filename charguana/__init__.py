@@ -8,7 +8,7 @@ cjk_charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
             'hiragana': [hiragana], 'katakana': [katakana],
             'korean': kor_utf8, 'ko':kor_utf8, 'kr':kor_utf8,
             'hangul_syllables': [hangul_syllables], 'hangul_jamo': [hangul_jamo],
-            'romanji': [romanji], 'punctuation': [cjk_symbols_punctuations],
+            'romanji': [romanji], 'cjk_punctuation': [cjk_symbols_punctuations],
             'bopomofo': [bopomofo],
             'cjk': sorted(set(han_utf8 + jap_utf8 + kor_utf8 + [romanji])),
             }
