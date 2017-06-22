@@ -13,7 +13,7 @@ thai_vowels_1 = u'\u0e30', u'\u0e3a'
 thai_baht = u'\u0e3f', u'\u0e3f' # currency symbol.
 thai_vowels_2 = u'\u0e40', u'\u0e46'
 thai_diacritics = u'\u0e47', u'\u0e4e'
-thai_others = u'\u0e5f', u'\u0e5b'
+thai_others = u'\u0e4f', u'\u0e5b'
 
 
 thai_utf8 = [thai_consonants, thai_abbrev_mark, thai_baht,
