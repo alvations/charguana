@@ -8,7 +8,7 @@ See https://en.wikipedia.org/wiki/Thai_(Unicode_block)
 thai_block = u'\u0e00', u'\u0e7f' # Unicode block, includes unassigned code points.
 
 thai_consonants = u'\u0e01', u'\u0e2e'
-thai_abbrev_mark = u'\u0e7f', u'\u0e7f' # pai-yan noi
+thai_abbrev_mark = u'\u0e2f', u'\u0e2f' # pai-yan noi
 thai_vowels_1 = u'\u0e30', u'\u0e3a'
 thai_baht = u'\u0e3f', u'\u0e3f' # currency symbol.
 thai_vowels_2 = u'\u0e40', u'\u0e46'

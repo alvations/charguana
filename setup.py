@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'charguana',
   packages = ['charguana'],
-  version = '0.1.9',
+  version = '0.1.10',
   description = 'A character vomiting library.',
   author = 'Liling Tan',
   license = 'MIT',
