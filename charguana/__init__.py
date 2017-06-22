@@ -2,6 +2,7 @@
 
 from charguana.cjk import *
 from charguana.perluniprops import *
+from charguana.thai import *
 
 cjk_charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
             'japanese': jap_utf8, 'ja': jap_utf8, 'jp': jap_utf8,
@@ -20,6 +21,9 @@ perluniprops_charsets = {'Close_Punctuation': close_punctuation,
                     'IsLower': is_lower, 'IsUpper': is_upper,
                     'IsN': is_n, 'IsSo': is_so}
 
+
+other_charsets = {'thai': thai_utf8}
+
 def get_chars_between(start, end):
     for i in range(ord(start), ord(end)+1):
         yield chr(i)
@@ -29,11 +33,18 @@ def get_cjk_charset(charset_name):
         for char in get_chars_between(start, end):
             yield char
 
+def get_charset_ranges(charset_ranges):
+    for start, end in charset_ranges:
+        for char in get_chars_between(start, end):
+            yield char
+
 def get_charset(charset_name):
     if charset_name in cjk_charsets:
         return get_cjk_charset(charset_name)
     elif charset_name in perluniprops_charsets:
         return iter(perluniprops_charsets[charset_name])
+    elif charset_name in other_charsets:
+        return get_charset_ranges(other_charsets[charset_name])
     else:
         return iter([])
 

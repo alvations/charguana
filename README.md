@@ -104,3 +104,21 @@ True
 >>> ''.join(list(get_charset('IsAlnum'))[:50])
 '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmn'
 ```
+
+
+**Other Language(s) Characters**:
+
+```python
+# Thai.
+>>> ''.join(list(get_charset('thai')))[:50]
+'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ\u0e7f฿ะั'
+# Thai consonants.
+>>> from charguana import get_charset_ranges
+>>> from charguana.thai import thai_consonants
+>>> list(get_charset_ranges([thai_consonants]))[:10]
+['ก', 'ข', 'ฃ', 'ค', 'ฅ', 'ฆ', 'ง', 'จ', 'ฉ', 'ช']
+# Thai Vowels
+>>> from charguana.thai import thai_vowels_1, thai_vowels_2
+>>> list(get_charset_ranges([thai_vowels_1, thai_vowels_2]))[:10]
+['ะ', 'ั', 'า', 'ำ', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู']
+```
