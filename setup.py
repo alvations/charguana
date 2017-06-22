@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'charguana',
   packages = ['charguana'],
-  version = '0.1.8',
+  version = '0.1.9',
   description = 'A character vomiting library.',
   author = 'Liling Tan',
   license = 'MIT',
   package_data={'charguana': ['data/perluniprops/*.txt']},
   url = 'https://github.com/alvations/charguana',
-  download_url = 'https://github.com/alvations/charguana/tarball/0.1.8',
+  download_url = 'https://github.com/alvations/charguana/tarball/0.1.9',
   keywords = ['unicode', 'character', 'vommit', 'linguistics' ],
   classifiers = [],
 )
