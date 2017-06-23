@@ -15,7 +15,9 @@ thai_vowels_2 = u'\u0e40', u'\u0e46'
 thai_diacritics = u'\u0e47', u'\u0e4e'
 thai_others = u'\u0e4f', u'\u0e5b'
 
-
 thai_utf8 = [thai_consonants, thai_abbrev_mark, thai_baht,
             thai_vowels_1, thai_vowels_2,
             thai_diacritics, thai_others]
+
+# Shield the top level imports from all the local variables.
+__all__ = ['thai_utf8', 'thai_block']

@@ -3,6 +3,7 @@
 from charguana.cjk import *
 from charguana.perluniprops import *
 from charguana.thai import *
+from charguana.viet import viet_utf8, viet_vowels, viet_consonants
 
 cjk_charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
             'japanese': jap_utf8, 'ja': jap_utf8, 'jp': jap_utf8,
@@ -22,7 +23,7 @@ perluniprops_charsets = {'Close_Punctuation': close_punctuation,
                     'IsN': is_n, 'IsSo': is_so}
 
 
-other_charsets = {'thai': thai_utf8}
+other_charsets = {'thai': thai_utf8, 'viet': viet_utf8}
 
 def get_chars_between(start, end):
     for i in range(ord(start), ord(end)+1):

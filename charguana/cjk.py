@@ -82,8 +82,7 @@ kor_utf8 = [hangul_syllables, hangul_jamo, hangul_compat_jamo,
             hangul_jamo_ext_a, hangul_jamo_ext_b,
             cjk_symbols_punctuations]
 
-
-#with open('output.txt', 'w') as fout:
-#    print( ''.join(list(all_cjk_chars(sys.argv[1]))) , file=fout)
-
-#print( ''.join(list(all_cjk_chars(sys.argv[1]))) )
+# Shield the top level imports from all the local variables.
+__all__ = ['han_utf8', 'jap_utf8', 'kor_utf8',
+           'hiragana', 'katakana', 'hangul_syllables', 'hangul_jamo',
+           'bopomofo', 'cjk_symbols_punctuations', 'romanji']
