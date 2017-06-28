@@ -164,5 +164,5 @@ is_n = [u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'\xb2',
     u'\uff19']
 
 # Shield the top level imports from all the local variables.
-__all__ = ['Close_Punctuation', 'Open_Punctuation', 'Currency_Symbol',
-           'IsSc', 'IsAlnum', 'IsAlpha', 'IsLower', 'IsUpper', 'IsN', 'IsSo']
+__all__ = ['close_punctuation', 'open_punctuation', 'currency_symbol',
+           'is_sc', 'is_alnum', 'is_alpha', 'is_lower', 'is_upper', 'is_n', 'is_so']
