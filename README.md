@@ -114,10 +114,6 @@ True
 '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmn'
 ```
 
-
-**Other Language(s) Characters**:
-
-
 **Thai**
 
 ```python
