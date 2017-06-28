@@ -44,10 +44,19 @@ Usage
 
 
 # Chinese.
+>>> from charguana import tradify, simplify
 >>> ''.join(list(get_charset('chinese'))) == ''.join(list(get_charset('zh')))
 True
 >>> ''.join(list(get_charset('zh'))) == ''.join(list(get_charset('cn')))
 True
+>>> list(get_charset('simplified_chinese'))[:10]
+['锕', '皑', '蔼', '碍', '爱', '嗳', '嫒', '瑷', '暧', '霭']
+>>> list(get_charset('traditional_chinese'))[:10]
+['錒', '皚', '藹', '礙', '愛', '噯', '嬡', '璦', '曖', '靄']
+>>> simplify('錒')
+'锕'
+>>> tradify('锕')
+'錒'
 
 # Japanese.
 >>> ''.join(list(get_charset('japanese'))) == ''.join(list(get_charset('ja')))
@@ -108,6 +117,8 @@ True
 
 **Other Language(s) Characters**:
 
+
+
 ```python
 # Thai.
 >>> ''.join(list(get_charset('thai')))[:50]
@@ -121,4 +132,55 @@ True
 >>> from charguana.thai import thai_vowels_1, thai_vowels_2
 >>> list(get_charset_ranges([thai_vowels_1, thai_vowels_2]))[:10]
 ['ะ', 'ั', 'า', 'ำ', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู']
+
+# Vietnamese
+
+```python
+>>> from charguana import get_charset
+>>> ''.join(list(get_charset('viet'))[:50])
+'AĂÂBCChDĐEÊGGhGiHIKKhLMNNgNghNhOÔƠPPhQRSTThTrUƯVXYFJWZaăâbcchd'
+
+>>> from charguana import get_charset
+>>> ''.join(list(get_charset('viet'))[:50])
+'AĂÂBCChDĐEÊGGhGiHIKKhLMNNgNghNhOÔƠPPhQRSTThTrUƯVXYFJWZaăâbcchd'
+
+# Vietnamese tones.
+>>> from charguana.viet import viet_tones
+>>> viet_tones.huyen
+'̀'
+>>> 'o' + viet_tones.huyen
+'ò'
+>>> 'o' + viet_tones.sac
+'ó'
+>>> 'o' + viet_tones.hoi
+'ỏ'
+>>> 'o' + viet_tones.nga
+'õ'
+>>> 'o' + viet_tones.nang
+'ọ'
+>>> 'o' + viet_tones.ngang
+'o'
+
+# Vietnamese consonants.
+>>> from charguana.viet import viet_consonants
+>>> list(viet_consonants)
+['A', 'Ă', 'Â', 'B', 'C', 'Ch', 'D', 'Đ', 'E', 'Ê', 'G', 'Gh', 'Gi', 'H', 'I', 'K', 'Kh', 'L', 'M', 'N', 'Ng', 'Ngh', 'Nh', 'O', 'Ô', 'Ơ', 'P', 'Ph', 'Q', 'R', 'S', 'T', 'Th', 'Tr', 'U', 'Ư', 'V', 'X', 'Y', 'F', 'J', 'W', 'Z', 'a', 'ă', 'â', 'b', 'c', 'ch', 'd', 'đ', 'e', 'ê', 'g', 'gh', 'gi', 'h', 'i', 'k', 'kh', 'l', 'm', 'n', 'ng', 'ngh', 'nh', 'o', 'ô', 'ơ', 'p', 'ph', 'q', 'r', 's', 't', 'th', 'tr', 'u', 'ư', 'v', 'x', 'y', 'f', 'j', 'w', 'z']
+
+# Vietnamese vowels with diacritics.
+>>> from charguana.viet import a, a6, a8
+>>> a
+['A', 'Á', 'À', 'Ả', 'Ã', 'Ạ', 'a', 'á', 'à', 'ả', 'ã', 'ạ']
+>>> a6
+['Â', 'Ấ', 'Ầ', 'Ẩ', 'Ẫ', 'Ậ', 'â', 'ấ', 'ầ', 'ẩ', 'ẫ', 'ậ']
+>>> a8
+['Ă', 'Ắ', 'Ằ', 'Ẳ', 'Ẵ', 'Ặ', 'ă', 'ắ', 'ằ', 'ẳ', 'ẵ', 'ặ']
+
+# Vietnamese tones.
+>>> from charguana.viet import viet_tones
+>>> viet_tones
+Tones(ngang='', huyen='̀', sac='́', hoi='̉', nga='̃', nang='̣')
+>>> 'o' + viet_tones.sac
+'ó'
+>>> 'o' + viet_tones.nang
+'ọ'
 ```
