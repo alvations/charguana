@@ -182,4 +182,9 @@ Tones(ngang='', huyen='̀', sac='́', hoi='̉', nga='̃', nang='̣')
 'ó'
 >>> 'o' + viet_tones.nang
 'ọ'
+
+# Vietnamese IME.
+>>> from charguana import viet_ime
+>>> viet_ime('Nguye64n Tra62n Anh Thu7')
+'Nguyễn Trằn Anh Thư'
 ```
