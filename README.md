@@ -118,6 +118,7 @@ True
 **Other Language(s) Characters**:
 
 
+**Thai**
 
 ```python
 # Thai.
@@ -132,10 +133,12 @@ True
 >>> from charguana.thai import thai_vowels_1, thai_vowels_2
 >>> list(get_charset_ranges([thai_vowels_1, thai_vowels_2]))[:10]
 ['ะ', 'ั', 'า', 'ำ', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู']
+```
 
-# Vietnamese
+**Vietnamese**
 
 ```python
+# Vietnamese
 >>> from charguana import get_charset
 >>> ''.join(list(get_charset('viet'))[:50])
 'AĂÂBCChDĐEÊGGhGiHIKKhLMNNgNghNhOÔƠPPhQRSTThTrUƯVXYFJWZaăâbcchd'
