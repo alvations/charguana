@@ -184,7 +184,14 @@ Tones(ngang='', huyen='̀', sac='́', hoi='̉', nga='̃', nang='̣')
 'ọ'
 
 # Vietnamese IME.
->>> from charguana import viet_ime
+>>> from charguana.viet import viet_ime
 >>> viet_ime('Nguye64n Tra62n Anh Thu7')
 'Nguyễn Trằn Anh Thư'
+# IME typo.
+>>> viet_ime('Nguye64n Tra62n Anh Thu8') # uncheck.
+'Nguyễn Trằn Anh Thu8'
+>>> viet_ime('Nguye64n Tra62n Anh Thu8', raise_keyerror=True) # check.
+...
+KeyError: 'u8'
+
 ```
