@@ -5,6 +5,7 @@ Character Vommitting. See https://goo.gl/MxONLX
 """
 
 import re
+import os
 from functools import partial
 
 cjk_unified_part1 = u'\u4E00', u'\u62FF'
@@ -85,6 +86,7 @@ kor_utf8 = [hangul_syllables, hangul_jamo, hangul_compat_jamo,
             hangul_jamo_ext_a, hangul_jamo_ext_b,
             cjk_symbols_punctuations]
 
+
 # gbk <-> big5 mappings from Mafan + Jianfan
 # https://github.com/hermanschaaf/mafan
 # https://code.google.com/archive/p/python-jianfan/
@@ -102,6 +104,17 @@ def convert_chinese(text, from_charset, to_charset):
 simplify = partial(convert_chinese, from_charset=big5, to_charset=gbk)
 tradify = partial(convert_chinese, from_charset=gbk, to_charset=big5)
 
+strokecounter_dir = os.path.dirname(os.path.abspath(__file__)) + '/data/strokecounter/'
+
+chinese_strokes = {}
+with open(strokecounter_dir + 'totalstrokes.txt') as fin:
+    for line in fin:
+        hexa, strokes = line.strip().split('\t')
+        chinese_strokes[chr(int(hexa, 16))] = int(strokes)
+
+
+# TODO
+"""
 ime_mapping = {'a1':u'\u0101', 'a2':u'\u00e1', 'a3':u'\u01ce', 'a4':u'\u00e0',
                'e1':u'\u0113', 'e2':u'\u00e9', 'e3':u'\u011b', 'e4':u'\u00e8',
                'i1':u'\u012b', 'i2':u'\u00ed', 'i3':u'\u01d0', 'i4':u'\u00ec',
@@ -112,12 +125,22 @@ ime_mapping = {'a1':u'\u0101', 'a2':u'\u00e1', 'a3':u'\u01ce', 'a4':u'\u00e0',
                u'\u00fc1':u'\u01d6', u'\u00fc2':u'\u01d8',
                u'\u00fc3':u'\u01da', u'\u00fc4':u'\u01dc'
                }
-"""
+
 def chinese_ime(s):
     for word, tone in zip(*[re.split('(\d+)', s.lower)] *2):
         # Replace the "u:" instances.
-        word = re.sub('u:', u'\u00fc', word)
+        word =
+
+s = 'chuang1tian1'
+# See https://stackoverflow.com/a/430296/610569
+# and https://stackoverflow.com/a/11350430/610569
+for word, tone in zip(*[iter(re.split('(\d+)', s.lower()))]*2):
+    word = re.sub('u:', u'\u00fc', word)
+    onset, nucleus, coda = re.search(u"([^aoeiuv\u00fc]+)?([aoeiuv\u00fc]+)([^aoeiuv\u00fc]+)?", word).groups()
+    print (word, nucleus, tone)
 """
+
+
 
 # Shield the top level imports from all the local variables.
 __all__ = ['han_utf8', 'jap_utf8', 'kor_utf8',

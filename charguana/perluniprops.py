@@ -4,7 +4,7 @@ import io
 import os
 import subprocess
 
-perluniprops_dir = os.path.dirname(os.path.abspath(__file__))
+perluniprops_dir = os.path.dirname(os.path.abspath(__file__)) + '/data/perluniprops/'
 
 def fetch_unichars(charset_name):
     """
@@ -48,19 +48,19 @@ is_sc = currency_symbol = [u'$', u'\xa2', u'\xa3', u'\xa4', u'\xa5', u'\u058f',
     u'\ua838', u'\ufdfc', u'\ufe69', u'\uff04', u'\uffe0', u'\uffe1', u'\uffe5',
     u'\uffe6']
 
-with io.open(perluniprops_dir+'/data/perluniprops/IsSo.txt', 'r', encoding='utf8') as fin:
+with io.open(perluniprops_dir+'IsSo.txt', 'r', encoding='utf8') as fin:
     is_so = list(fin.read())
 
-with io.open(perluniprops_dir+'/data/perluniprops/IsAlpha.txt', 'r', encoding='utf8') as fin:
+with io.open(perluniprops_dir+'IsAlpha.txt', 'r', encoding='utf8') as fin:
     is_alpha = list(fin.read())
 
-with io.open(perluniprops_dir+'/data/perluniprops/IsAlnum.txt', 'r', encoding='utf8') as fin:
+with io.open(perluniprops_dir+'IsAlnum.txt', 'r', encoding='utf8') as fin:
     is_alnum = list(fin.read())
 
-with io.open(perluniprops_dir+'/data/perluniprops/IsLower.txt', 'r', encoding='utf8') as fin:
+with io.open(perluniprops_dir+'IsLower.txt', 'r', encoding='utf8') as fin:
     is_lower = list(fin.read())
 
-with io.open(perluniprops_dir+'/data/perluniprops/IsUpper.txt', 'r', encoding='utf8') as fin:
+with io.open(perluniprops_dir+'IsUpper.txt', 'r', encoding='utf8') as fin:
     is_upper = list(fin.read())
 
 is_n = [u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'\xb2',
