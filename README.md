@@ -186,12 +186,20 @@ Tones(ngang='', huyen='̀', sac='́', hoi='̉', nga='̃', nang='̣')
 # Vietnamese IME.
 >>> from charguana.viet import viet_ime
 >>> viet_ime('Nguye64n Tra62n Anh Thu7')
-'Nguyễn Trằn Anh Thư'
+'Nguyễn Trần Anh Thư'
 # IME typo.
 >>> viet_ime('Nguye64n Tra62n Anh Thu8') # uncheck.
-'Nguyễn Trằn Anh Thu8'
+'Nguyễn Trần Anh Thu8'
 >>> viet_ime('Nguye64n Tra62n Anh Thu8', raise_keyerror=True) # check.
 ...
 KeyError: 'u8'
-
+# Telex
+>>> viet_ime('Nguyeefn Traafn Anh Thuw', mapping='telex')
+'Nguyền Trần Anh Thư'
+# Short cut for TELEX ime with functools.partial
+>>> from functools import partial
+>>> from charguana.viet import viet_ime
+>>> telex_ime = partial(viet_ime, mapping='telex')
+>>> telex_ime('Nguyeefn Traafn Anh Thuw')
+'Nguyền Trần Anh Thư'
 ```

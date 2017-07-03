@@ -278,8 +278,8 @@ viet_utf8 = viet_consonants + viet_vowels
 
 vni_mappings = {'A8':a8[0], 'A81':a8[1], 'A82':a8[2], 'A83':a8[3], 'A84':a8[4],  'A85':a8[5],
                 'a8':a8[6], 'a81':a8[7], 'a82':a8[8], 'a83':a8[9], 'a84':a8[10], 'a85':a8[11],
-                'A6':a8[0], 'A61':a8[1], 'A62':a8[2], 'A63':a8[3], 'A64':a8[4],  'A65':a8[5],
-                'a6':a8[6], 'a61':a8[7], 'a62':a8[8], 'a63':a8[9], 'a64':a8[10], 'a65':a8[11],
+                'A6':a6[0], 'A61':a6[1], 'A62':a6[2], 'A63':a6[3], 'A64':a6[4],  'A65':a6[5],
+                'a6':a6[6], 'a61':a6[7], 'a62':a6[8], 'a63':a6[9], 'a64':a6[10], 'a65':a6[11],
                 'E6':e6[0], 'E61':e6[1], 'E62':e6[2], 'E63':e6[3], 'E64':e6[4],  'E65':e6[5],
                 'e6':e6[6], 'e61':e6[7], 'e62':e6[8], 'e63':e6[9], 'e64':e6[10], 'e65':e6[11],
                 'O6':o6[0], 'O61':o6[1], 'O62':o6[2], 'O63':o6[3], 'O64':o6[4],  'O65':o6[5],
@@ -293,10 +293,10 @@ vni_mappings = {'A8':a8[0], 'A81':a8[1], 'A82':a8[2], 'A83':a8[3], 'A84':a8[4], 
 
 telex_mappings = {'Aw':a8[0], 'Aws':a8[1], 'Awf':a8[2], 'Awr':a8[3], 'Awx':a8[4],  'Awj':a8[5],
                   'aw':a8[6], 'aws':a8[7], 'awf':a8[8], 'awr':a8[9], 'awx':a8[10], 'awj':a8[11],
-                  'Aa':a8[0], 'Aas':a8[1], 'Aaf':a8[2], 'Aar':a8[3], 'Aax':a8[4],  'Aaj':a8[5],
-                  'aa':a8[6], 'aas':a8[7], 'aaf':a8[8], 'aar':a8[9], 'aax':a8[10], 'aaj':a8[11],
+                  'Aa':a6[0], 'Aas':a6[1], 'Aaf':a6[2], 'Aar':a6[3], 'Aax':a6[4],  'Aaj':a6[5],
+                  'aa':a6[6], 'aas':a6[7], 'aaf':a6[8], 'aar':a6[9], 'aax':a6[10], 'aaj':a6[11],
                   'Ee':e6[0], 'Ees':e6[1], 'Eef':e6[2], 'Eer':e6[3], 'Eex':e6[4],  'Eej':e6[5],
-                  'ee':e6[6], 'Ees':e6[7], 'Eef':e6[8], 'Eer':e6[9], 'Eex':e6[10], 'Eej':e6[11],
+                  'ee':e6[6], 'ees':e6[7], 'eef':e6[8], 'eer':e6[9], 'eex':e6[10], 'eej':e6[11],
                   'Oo':o6[0], 'Oos':o6[1], 'Oof':o6[2], 'Oor':o6[3], 'Oox':o6[4],  'Ooj':o6[5],
                   'oo':o6[6], 'oos':o6[7], 'oof':o6[8], 'oor':o6[9], 'oox':o6[10], 'ooj':o6[11],
                   'Ow':o7[0], 'Oos':o7[1], 'Oof':o7[2], 'Owr':o7[3], 'Owx':o7[4],  'Owj':o7[5],
@@ -307,11 +307,18 @@ telex_mappings = {'Aw':a8[0], 'Aws':a8[1], 'Awf':a8[2], 'Awr':a8[3], 'Awx':a8[4]
                 }
 
 def viet_ime(s, mapping='vni', raise_keyerror=False):
-    _mapping = {'vni': vni_mappings, 'telex': telex_mappings}[mapping]
-    if raise_keyerror:
-        return re.sub(r'[a-z]\d+',lambda m: _mapping[m.group(0)], s)
-    else:
-        return re.sub(r'[a-z]\d+',lambda m: _mapping.get(m.group(0), m.group(0)),s)
+    if mapping == 'vni':
+        _mapping = vni_mappings
+        _pattern = r'[a-z]\d+'
+        if raise_keyerror:
+            return re.sub(r'[a-z]\d+',lambda m: _mapping[m.group(0)], s)
+        else:
+            return re.sub(r'[a-z]\d+',lambda m: _mapping.get(m.group(0), m.group(0)),s)
+    elif mapping == 'telex':
+        _mapping = telex_mappings
+        _pattern = '|'.join(re.escape(word) for word in
+                            sorted(_mapping, key=len, reverse=True))
+        return re.sub(_pattern, lambda match:telex_mappings[match.group()], s)
 
 
 # Shield the top level imports from all the local variables.
