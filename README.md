@@ -57,6 +57,10 @@ True
 '锕'
 >>> tradify('锕')
 '錒'
+>>> chinese_strokes['绝']
+9
+>>> chinese_strokes['絕']
+12
 
 # Japanese.
 >>> ''.join(list(get_charset('japanese'))) == ''.join(list(get_charset('ja')))

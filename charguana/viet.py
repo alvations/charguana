@@ -288,8 +288,19 @@ vni_mappings = {'A8':a8[0], 'A81':a8[1], 'A82':a8[2], 'A83':a8[3], 'A84':a8[4], 
                 'o7':o7[6], 'o71':o7[7], 'o72':o7[8], 'o73':o7[9], 'o74':o7[10], 'o75':o7[11],
                 'U7':u7[0], 'U71':o7[1], 'U72':o7[2], 'U73':o7[3], 'U74':o7[4],  'U75':o7[5],
                 'u7':u7[6], 'u71':o7[7], 'u72':o7[8], 'u73':o7[9], 'u74':o7[10], 'u75':o7[11],
-                'D9': u'Đ', 'd9': u'đ'
+                'D9': u'Đ', 'd9': u'đ',
+                'A1':a[1], 'A2':a[2], 'A3':a[3], 'A4':a[4],  'A5':a[5],
+                'a1':a[7], 'a2':a[8], 'a3':a[9], 'a4':a[10], 'a5':a[11],
+                'E1':e[1], 'E2':e[2], 'E3':e[3], 'E4':e[4],  'E5':e[5],
+                'e1':e[7], 'e2':e[8], 'e3':e[9], 'e4':e[10], 'e5':e[11],
+                'I1':i[1], 'I2':i[2], 'I3':i[3], 'I4':i[4],  'I5':i[5],
+                'i1':i[7], 'i2':i[8], 'i3':i[9], 'i4':i[10], 'i5':i[11],
+                'O1':i[1], 'O2':i[2], 'O3':i[3], 'O4':i[4],  'O5':i[5],
+                'o1':i[7], 'o2':i[8], 'o3':i[9], 'o4':i[10], 'o5':i[11],
+                'U1':i[1], 'U2':i[2], 'U3':i[3], 'U4':i[4],  'U5':i[5],
+                'u1':i[7], 'u2':i[8], 'u3':i[9], 'u4':i[10], 'u5':i[11],
                 }
+
 
 telex_mappings = {'Aw':a8[0], 'Aws':a8[1], 'Awf':a8[2], 'Awr':a8[3], 'Awx':a8[4],  'Awj':a8[5],
                   'aw':a8[6], 'aws':a8[7], 'awf':a8[8], 'awr':a8[9], 'awx':a8[10], 'awj':a8[11],
@@ -303,17 +314,28 @@ telex_mappings = {'Aw':a8[0], 'Aws':a8[1], 'Awf':a8[2], 'Awr':a8[3], 'Awx':a8[4]
                   'ow':o7[6], 'ows':o7[7], 'oof':o7[8], 'owr':o7[9], 'owx':o7[10], 'owj':o7[11],
                   'Uw':u7[0], 'Uws':o7[1], 'Uwf':o7[2], 'Uwr':o7[3], 'Uwx':o7[4],  'Uwj':o7[5],
                   'uw':u7[6], 'uws':o7[7], 'uwf':o7[8], 'uwr':o7[9], 'uwx':o7[10], 'uwj':o7[11],
-                  'Dd': u'Đ', 'dd': u'đ'
+                  'Dd': u'Đ', 'dd': u'đ',
+                  'As':a[1], 'Af':a[2], 'Ar':a[3], 'Ax':a[4],  'Aj':a[5],
+                  'as':a[7], 'af':a[8], 'ar':a[9], 'ax':a[10], 'aj':a[11],
+                  'Es':e[1], 'Ef':e[2], 'Er':e[3], 'Ex':e[4],  'Ej':e[5],
+                  'es':e[7], 'ef':e[8], 'er':e[9], 'ex':e[10], 'ej':e[11],
+                  'Is':i[1], 'If':i[2], 'Ir':i[3], 'Ix':i[4],  'Ij':i[5],
+                  'is':i[7], 'if':i[8], 'ir':i[9], 'ix':i[10], 'ij':i[11],
+                  'Os':i[1], 'Of':i[2], 'Or':i[3], 'Ox':i[4],  'Oj':i[5],
+                  'os':i[7], 'of':i[8], 'or':i[9], 'ox':i[10], 'oj':i[11],
+                  'Us':i[1], 'Uf':i[2], 'Ur':i[3], 'Ux':i[4],  'Uj':i[5],
+                  'us':i[7], 'uf':i[8], 'ur':i[9], 'ux':i[10], 'uj':i[11],
+
                 }
 
 def viet_ime(s, mapping='vni', raise_keyerror=False):
     if mapping == 'vni':
         _mapping = vni_mappings
-        _pattern = r'[a-z]\d+'
+        _pattern = r'[A-Za-z]\d+'
         if raise_keyerror:
-            return re.sub(r'[a-z]\d+',lambda m: _mapping[m.group(0)], s)
+            return re.sub(r'[A-Za-z]\d+',lambda m: _mapping[m.group(0)], s)
         else:
-            return re.sub(r'[a-z]\d+',lambda m: _mapping.get(m.group(0), m.group(0)),s)
+            return re.sub(r'[A-Za-z]\d+',lambda m: _mapping.get(m.group(0), m.group(0)),s)
     elif mapping == 'telex':
         _mapping = telex_mappings
         _pattern = '|'.join(re.escape(word) for word in
