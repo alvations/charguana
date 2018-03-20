@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
+from functools import partial
+
 # gbk <-> big5 mappings from Mafan + Jianfan
 # https://github.com/hermanschaaf/mafan
 # https://code.google.com/archive/p/python-jianfan/

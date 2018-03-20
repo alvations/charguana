@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from charguana.cjk import *
+from charguana.chinese import *
 from charguana.perluniprops import *
 from charguana.thai import *
 from charguana.viet import *

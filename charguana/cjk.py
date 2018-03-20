@@ -6,7 +6,6 @@ Character Vommitting. See https://goo.gl/MxONLX
 
 import re
 import os
-from functools import partial
 
 cjk_unified_part1 = u'\u4E00', u'\u62FF'
 cjk_unified_part2 = u'\u6300', u'\u77FF'
@@ -89,6 +88,5 @@ kor_utf8 = [hangul_syllables, hangul_jamo, hangul_compat_jamo,
 
 # Shield the top level imports from all the local variables.
 __all__ = ['han_utf8', 'jap_utf8', 'kor_utf8',
-           'simplified_chinese', 'traditional_chinese',
            'hiragana', 'katakana', 'hangul_syllables', 'hangul_jamo',
            'bopomofo', 'cjk_symbols_punctuations', 'romanji']
