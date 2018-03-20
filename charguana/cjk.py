@@ -41,11 +41,37 @@ hiragana =  u'\u3040', u'\u309F'
 katakana =  u'\u30A0', u'\u30FF'
 romanji =   u'\uFF00', u'\uFFEF' # Romanji with half-width katakan.
 
+# Hangul syllables.
 hangul_syllables =   u'\uAC00', u'\uD7AF'
-hangul_jamo =        u'\u1100', u'\u11FF'
+hangul_syllables_assigned =   u'\uAC00', u'\uD7A3'
+# Hangul Jamos.
+hangul_jamo = u'\u1100', u'\u11FF'
+hangul_jamo_modern_1 = u'\u1100', u'\u1112'
+hangul_jamo_modern_2 = u'\u1161', u'\u1175'
+hangul_jamo_modern_3 = u'\u11A8', u'\u11C2'
+hangule_jamo_modern_all = [hangul_jamo_modern_1,
+                           hangul_jamo_modern_2,
+                           hangul_jamo_modern_3]
+# HCJ
 hangul_compat_jamo = u'\u3130', u'\u318F'
+hangul_compat_jamo_assigned = u'\u3131', u'\u318E'
+hangul_compat_jamo_assigned_all = [hangul_compat_jamo_assigned]
+hangul_compat_jamo_modern_1 = u'\u3131', u'\u314E'
+hangul_compat_jamo_modern_b = u'\u314F', u'\u3163'
+hangul_compat_jamo_modern_all = [hangul_compat_jamo_modern_1,
+                                 hangul_compat_jamo_modern_b]
+hangul_compat_jamo_invalid = u'\u3164'
+# Hangul extensions
 hangul_jamo_ext_a =  u'\uA960', u'\uA97F'
+hangul_jamo_ext_a_assigned =  u'\uA960', u'\uA97C'
 hangul_jamo_ext_b =  u'\uD7B0', u'\uD7FF'
+hangul_jamo_ext_b_assigned_1 =  u'\uD7B0', u'\uD7C6'
+hangul_jamo_ext_b_assigned_2 =  u'\uD7CB', u'\uD7FB'
+# All assigned jamo
+hangul_jamo_assigned_all = [hangul_jamo,
+                            hangul_jamo_ext_a_assigned,
+                            hangul_jamo_ext_b_assigned_1,
+                            hangul_jamo_ext_b_assigned_2]
 
 # From https://en.wikipedia.org/wiki/Bopomofo
 bopomofo = u'\u3100', u'\u312F'
