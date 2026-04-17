@@ -193,6 +193,66 @@ def test_fetch_unichars_friendly_error(monkeypatch):
         raise AssertionError('expected RuntimeError')
 
 
+def test_emoji_get_charset():
+    chars = get_charset('emoji')
+    assert isinstance(chars, list)
+    # Well-known emoji should be in the Emoji_Presentation set.
+    assert '😀' in chars
+    assert '🎉' in chars
+    assert '❤' not in chars  # text-default (needs VS16), not Emoji_Presentation
+
+
+def test_is_emoji_single_char():
+    from charguana import is_emoji
+    assert is_emoji('😀')
+    assert is_emoji('🎉')
+    assert not is_emoji('A')
+    assert not is_emoji('')
+    assert not is_emoji('hi')  # not a known sequence
+
+
+def test_is_emoji_sequences():
+    from charguana import is_emoji
+    # US flag — a regional-indicator sequence.
+    assert is_emoji('🇺🇸')
+    # ZWJ composition.
+    assert is_emoji('👨\u200d👩\u200d👧\u200d👦')
+    # Random multi-char string is not an emoji sequence.
+    assert not is_emoji('😀😀')
+
+
+def test_emoji_properties_map():
+    from charguana.emoji import emoji_properties
+    assert 'Emoji' in emoji_properties['😀']
+    assert 'Emoji_Presentation' in emoji_properties['😀']
+
+
+def test_emoji_is_lazy():
+    """emoji module should not open data files on import."""
+    import builtins
+    import importlib
+    import sys
+
+    for mod in list(sys.modules):
+        if mod == 'charguana' or mod.startswith('charguana.'):
+            del sys.modules[mod]
+
+    opened = []
+    real_open = builtins.open
+
+    def spy(*args, **kw):
+        opened.append(str(args[0] if args else kw.get('file')))
+        return real_open(*args, **kw)
+
+    builtins.open = spy
+    try:
+        importlib.import_module('charguana')
+    finally:
+        builtins.open = real_open
+
+    assert not any('data/emoji' in p for p in opened), opened
+
+
 def test_importing_charguana_does_not_open_data_files():
     """Laziness: `import charguana` should not touch perluniprops or strokecounter files."""
     import builtins

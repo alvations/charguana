@@ -6,6 +6,7 @@ from charguana.chinese import chinese_strokes, simplify, tradify
 from charguana.perluniprops import *
 from charguana.thai import *
 from charguana.viet import *
+from charguana.emoji import is_emoji, fetch_emoji
 
 cjk_charsets = {'chinese': han_utf8, 'zh': han_utf8, 'cn': han_utf8,
                 'japanese': jap_utf8, 'ja': jap_utf8, 'jp': jap_utf8,
@@ -104,12 +105,17 @@ def get_charset_ranges(charset_ranges):
 # (either an explicit list, a long string, or an expanded range). The Thai
 # block is stored as (start, end) tuples in ``thai_utf8`` for reference; we
 # expand it once here so the dict is shape-consistent with the others.
+#
+# ``'emoji'`` is lazy-resolved: the underlying frozenset is loaded on first
+# access via ``charguana.emoji`` (see ``iter_charset`` below).
 other_charsets = {
     'thai': list(get_charset_ranges(thai_utf8)),
     'viet': viet_utf8,
     'traditional_chinese': big5,
     'simplified_chinese': gbk,
 }
+
+_lazy_other_charsets = {'emoji'}
 
 
 def iter_charset(charset_name):
@@ -120,7 +126,7 @@ def iter_charset(charset_name):
 
     Valid names: any key of ``cjk_charsets``, ``perluniprops_charsets``, or
     ``other_charsets`` — e.g. 'chinese', 'japanese', 'korean', 'thai', 'viet',
-    'traditional_chinese', 'simplified_chinese', 'IsAlpha', 'IsN',
+    'traditional_chinese', 'simplified_chinese', 'emoji', 'IsAlpha', 'IsN',
     'Open_Punctuation', 'Currency_Symbol', etc. Unknown names yield nothing.
     """
     if charset_name in cjk_charsets:
@@ -129,6 +135,9 @@ def iter_charset(charset_name):
         return iter(perluniprops_charsets[charset_name])
     if charset_name in other_charsets:
         return iter(other_charsets[charset_name])
+    if charset_name in _lazy_other_charsets:
+        from charguana import emoji as _emoji
+        return iter(sorted(getattr(_emoji, f'{charset_name}_chars')))
     return iter(())
 
 
@@ -179,6 +188,8 @@ __all__ = [
     'thai_utf8', 'thai_block',
     # Vietnamese
     'viet_utf8', 'viet_tones', 'viet_consonants', 'viet_ime',
+    # Emoji
+    'is_emoji', 'fetch_emoji',
     # perluniprops
     'open_punctuation', 'close_punctuation', 'currency_symbol',
     'is_sc', 'is_alnum', 'is_alpha', 'is_lower', 'is_upper', 'is_n', 'is_so',

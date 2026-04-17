@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "charguana"
-version = "0.2.0"
+version = "0.3.0"
 description = "A character vomiting library — Unicode character sets for CJK, Thai, Vietnamese, and Perl uniprops."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -39,7 +39,11 @@ test = ["pytest>=7"]
 packages = ["charguana"]
 
 [tool.setuptools.package-data]
-charguana = ["data/perluniprops/*.txt", "data/strokecounter/*.txt"]
+charguana = [
+    "data/perluniprops/*.txt",
+    "data/strokecounter/*.txt",
+    "data/emoji/*.txt",
+]
 
 [tool.pytest.ini_options]
 filterwarnings = ["error"]
