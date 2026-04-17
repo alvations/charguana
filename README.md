@@ -13,37 +13,6 @@ Install
 pip install charguana
 ```
 
-### What's new in 0.3.0
-
-- **Emoji support.** New `charguana.emoji` module bundles parsed Unicode
-  emoji data (latest version).
-  - `get_charset('emoji')` returns the list of single-codepoint
-    Emoji_Presentation characters.
-  - `is_emoji(s)` — True for a single emoji char or a known multi-char
-    sequence (flags, ZWJ combos, keycaps, modifier sequences).
-  - `charguana.emoji.emoji_sequences`, `emoji_zwj_sequences`,
-    `emoji_properties` for finer access. All lazy-loaded.
-  - `fetch_emoji(version='latest')` hits unicode.org for fresh data at
-    runtime (requires network; no side effects on disk).
-- Maintainer tooling: `scripts/refresh_emoji.py` regenerates the bundled
-  emoji data files from unicode.org. Alongside the existing
-  `scripts/generate_perluniprops.sh`.
-
-### What's new in 0.2.0
-
-- `get_charset(name)` now returns a **list** instead of a generator. Use
-  `iter_charset(name)` if you want the old lazy behavior.
-- `all_in_charset(string, charset)` added alongside `islang` — the former
-  requires every character to match; `islang` remains "any character
-  matches".
-- `is_in_charsets(ch, ranges)` is now exposed at the top level (previously
-  only in `charguana.korean`).
-- `perluniprops` props (`IsAlpha`, `IsAlnum`, `IsLower`, `IsUpper`, `IsSo`)
-  and `chinese_strokes` are now loaded lazily on first access, so
-  `import charguana` is cheap.
-- Multiple Vietnamese IME bug fixes (VNI `U7*`, `O1..5`, `U1..5`; Telex
-  `Uws/Owf/Os/Us` families previously produced the wrong vowel).
-
 
 Usage
 ====
@@ -268,3 +237,45 @@ KeyError: 'u8'
 >>> telex_ime('Nguyeefn Traafn Anh Thuw')
 'Nguyền Trần Anh Thư'
 ```
+
+
+Changelog
+====
+
+<details>
+<summary><b>0.3.0</b> — Emoji support</summary>
+
+- **Emoji support.** New `charguana.emoji` module bundles parsed Unicode
+  emoji data (latest version).
+  - `get_charset('emoji')` returns the list of single-codepoint
+    Emoji_Presentation characters.
+  - `is_emoji(s)` — True for a single emoji char or a known multi-char
+    sequence (flags, ZWJ combos, keycaps, modifier sequences).
+  - `charguana.emoji.emoji_sequences`, `emoji_zwj_sequences`,
+    `emoji_properties` for finer access. All lazy-loaded.
+  - `fetch_emoji(version='latest')` hits unicode.org for fresh data at
+    runtime (requires network; no side effects on disk).
+- Maintainer tooling: `scripts/refresh_emoji.py` regenerates the bundled
+  emoji data files from unicode.org. Alongside the existing
+  `scripts/generate_perluniprops.sh`.
+
+</details>
+
+<details>
+<summary><b>0.2.0</b> — Bug fixes, lazy loading, modern packaging</summary>
+
+- `get_charset(name)` now returns a **list** instead of a generator. Use
+  `iter_charset(name)` if you want the old lazy behavior.
+- `all_in_charset(string, charset)` added alongside `islang` — the former
+  requires every character to match; `islang` remains "any character
+  matches".
+- `is_in_charsets(ch, ranges)` is now exposed at the top level (previously
+  only in `charguana.korean`).
+- `perluniprops` props (`IsAlpha`, `IsAlnum`, `IsLower`, `IsUpper`, `IsSo`)
+  and `chinese_strokes` are now loaded lazily on first access, so
+  `import charguana` is cheap.
+- Multiple Vietnamese IME bug fixes (VNI `U7*`, `O1..5`, `U1..5`; Telex
+  `Uws/Owf/Os/Us` families previously produced the wrong vowel).
+
+</details>
+
