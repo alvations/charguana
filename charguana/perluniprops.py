@@ -1,168 +1,193 @@
 # -*- coding: utf-8 -*-
 
-import io
 import os
 import subprocess
 
 perluniprops_dir = os.path.dirname(os.path.abspath(__file__)) + '/data/perluniprops/'
 
+
 def fetch_unichars(charset_name):
+    r"""Call the external ``unichars`` command and return the matched characters.
+
+    ``unichars`` is a Perl tool from Unicode::Tussle. Install with::
+
+        cpan Unicode::Tussle
+
+    Returns the concatenation of every character matching
+    ``\p{charset_name}``. Raises :class:`RuntimeError` with an install hint if
+    ``unichars`` is not on ``$PATH``.
     """
-    It's necessary to install the `unichars` command first using:
-        $ cpan Unicode::Tussle
-    """
-    cmd = "unichars '\p{" + charset_name + "}' | cut -f2 -d' ' | tr -d '\n'"
-    return subprocess.check_output(cmd, shell=True).decode('utf8')
+    try:
+        out = subprocess.check_output(['unichars', r'\p{' + charset_name + '}'])
+    except FileNotFoundError as exc:
+        raise RuntimeError(
+            "The `unichars` command is not on $PATH. "
+            "Install it with `cpan Unicode::Tussle` (Perl's CPAN)."
+        ) from exc
+    # `unichars` output: one record per line, the character is the 2nd
+    # whitespace-separated field.
+    return ''.join(line.split()[1] for line in out.decode('utf-8').splitlines() if line.split())
 
 
-close_punctuation = [u')', u']', u'}', u'\u0f3b', u'\u0f3d', u'\u169c',
-    u'\u2046', u'\u207e', u'\u208e', u'\u232a', u'\u2769', u'\u276b', u'\u276d',
-    u'\u276f', u'\u2771', u'\u2773', u'\u2775', u'\u27c6', u'\u27e7', u'\u27e9',
-    u'\u27eb', u'\u27ed', u'\u27ef', u'\u2984', u'\u2986', u'\u2988', u'\u298a',
-    u'\u298c', u'\u298e', u'\u2990', u'\u2992', u'\u2994', u'\u2996', u'\u2998',
-    u'\u29d9', u'\u29db', u'\u29fd', u'\u2e23', u'\u2e25', u'\u2e27', u'\u2e29',
-    u'\u3009', u'\u300b', u'\u300d', u'\u300f', u'\u3011', u'\u3015', u'\u3017',
-    u'\u3019', u'\u301b', u'\u301e', u'\u301f', u'\ufd3f', u'\ufe18', u'\ufe36',
-    u'\ufe38', u'\ufe3a', u'\ufe3c', u'\ufe3e', u'\ufe40', u'\ufe42', u'\ufe44',
-    u'\ufe48', u'\ufe5a', u'\ufe5c', u'\ufe5e', u'\uff09', u'\uff3d', u'\uff5d',
-    u'\uff60', u'\uff63']
+close_punctuation = [')', ']', '}', '\u0f3b', '\u0f3d', '\u169c',
+    '\u2046', '\u207e', '\u208e', '\u232a', '\u2769', '\u276b', '\u276d',
+    '\u276f', '\u2771', '\u2773', '\u2775', '\u27c6', '\u27e7', '\u27e9',
+    '\u27eb', '\u27ed', '\u27ef', '\u2984', '\u2986', '\u2988', '\u298a',
+    '\u298c', '\u298e', '\u2990', '\u2992', '\u2994', '\u2996', '\u2998',
+    '\u29d9', '\u29db', '\u29fd', '\u2e23', '\u2e25', '\u2e27', '\u2e29',
+    '\u3009', '\u300b', '\u300d', '\u300f', '\u3011', '\u3015', '\u3017',
+    '\u3019', '\u301b', '\u301e', '\u301f', '\ufd3f', '\ufe18', '\ufe36',
+    '\ufe38', '\ufe3a', '\ufe3c', '\ufe3e', '\ufe40', '\ufe42', '\ufe44',
+    '\ufe48', '\ufe5a', '\ufe5c', '\ufe5e', '\uff09', '\uff3d', '\uff5d',
+    '\uff60', '\uff63']
 
-open_punctuation = [u'(', u'[', u'{', u'\u0f3a', u'\u0f3c', u'\u169b',
-    u'\u201a', u'\u201e', u'\u2045', u'\u207d', u'\u208d', u'\u2329', u'\u2768',
-    u'\u276a', u'\u276c', u'\u276e', u'\u2770', u'\u2772', u'\u2774', u'\u27c5',
-    u'\u27e6', u'\u27e8', u'\u27ea', u'\u27ec', u'\u27ee', u'\u2983', u'\u2985',
-    u'\u2987', u'\u2989', u'\u298b', u'\u298d', u'\u298f', u'\u2991', u'\u2993',
-    u'\u2995', u'\u2997', u'\u29d8', u'\u29da', u'\u29fc', u'\u2e22', u'\u2e24',
-    u'\u2e26', u'\u2e28', u'\u3008', u'\u300a', u'\u300c', u'\u300e', u'\u3010',
-    u'\u3014', u'\u3016', u'\u3018', u'\u301a', u'\u301d', u'\ufd3e', u'\ufe17',
-    u'\ufe35', u'\ufe37', u'\ufe39', u'\ufe3b', u'\ufe3d', u'\ufe3f', u'\ufe41',
-    u'\ufe43', u'\ufe47', u'\ufe59', u'\ufe5b', u'\ufe5d', u'\uff08', u'\uff3b',
-    u'\uff5b', u'\uff5f', u'\uff62']
+open_punctuation = ['(', '[', '{', '\u0f3a', '\u0f3c', '\u169b',
+    '\u201a', '\u201e', '\u2045', '\u207d', '\u208d', '\u2329', '\u2768',
+    '\u276a', '\u276c', '\u276e', '\u2770', '\u2772', '\u2774', '\u27c5',
+    '\u27e6', '\u27e8', '\u27ea', '\u27ec', '\u27ee', '\u2983', '\u2985',
+    '\u2987', '\u2989', '\u298b', '\u298d', '\u298f', '\u2991', '\u2993',
+    '\u2995', '\u2997', '\u29d8', '\u29da', '\u29fc', '\u2e22', '\u2e24',
+    '\u2e26', '\u2e28', '\u3008', '\u300a', '\u300c', '\u300e', '\u3010',
+    '\u3014', '\u3016', '\u3018', '\u301a', '\u301d', '\ufd3e', '\ufe17',
+    '\ufe35', '\ufe37', '\ufe39', '\ufe3b', '\ufe3d', '\ufe3f', '\ufe41',
+    '\ufe43', '\ufe47', '\ufe59', '\ufe5b', '\ufe5d', '\uff08', '\uff3b',
+    '\uff5b', '\uff5f', '\uff62']
 
-is_sc = currency_symbol = [u'$', u'\xa2', u'\xa3', u'\xa4', u'\xa5', u'\u058f',
-    u'\u060b', u'\u09f2', u'\u09f3', u'\u09fb', u'\u0af1', u'\u0bf9', u'\u0e3f',
-    u'\u17db', u'\u20a0', u'\u20a1', u'\u20a2', u'\u20a3', u'\u20a4', u'\u20a5',
-    u'\u20a6', u'\u20a7', u'\u20a8', u'\u20a9', u'\u20aa', u'\u20ab', u'\u20ac',
-    u'\u20ad', u'\u20ae', u'\u20af', u'\u20b0', u'\u20b1', u'\u20b2', u'\u20b3',
-    u'\u20b4', u'\u20b5', u'\u20b6', u'\u20b7', u'\u20b8', u'\u20b9', u'\u20ba',
-    u'\ua838', u'\ufdfc', u'\ufe69', u'\uff04', u'\uffe0', u'\uffe1', u'\uffe5',
-    u'\uffe6']
+is_sc = currency_symbol = ['$', '\xa2', '\xa3', '\xa4', '\xa5', '\u058f',
+    '\u060b', '\u09f2', '\u09f3', '\u09fb', '\u0af1', '\u0bf9', '\u0e3f',
+    '\u17db', '\u20a0', '\u20a1', '\u20a2', '\u20a3', '\u20a4', '\u20a5',
+    '\u20a6', '\u20a7', '\u20a8', '\u20a9', '\u20aa', '\u20ab', '\u20ac',
+    '\u20ad', '\u20ae', '\u20af', '\u20b0', '\u20b1', '\u20b2', '\u20b3',
+    '\u20b4', '\u20b5', '\u20b6', '\u20b7', '\u20b8', '\u20b9', '\u20ba',
+    '\ua838', '\ufdfc', '\ufe69', '\uff04', '\uffe0', '\uffe1', '\uffe5',
+    '\uffe6']
 
-with io.open(perluniprops_dir+'IsSo.txt', 'r', encoding='utf8') as fin:
-    is_so = list(fin.read())
+# File-backed properties are loaded lazily on first attribute access.
+# This avoids reading ~200 KB of data at import time for users who only need
+# the CJK / Thai / Viet charsets.
+_file_backed = {
+    'is_so':    'IsSo.txt',
+    'is_alpha': 'IsAlpha.txt',
+    'is_alnum': 'IsAlnum.txt',
+    'is_lower': 'IsLower.txt',
+    'is_upper': 'IsUpper.txt',
+}
+_cache = {}
 
-with io.open(perluniprops_dir+'IsAlpha.txt', 'r', encoding='utf8') as fin:
-    is_alpha = list(fin.read())
 
-with io.open(perluniprops_dir+'IsAlnum.txt', 'r', encoding='utf8') as fin:
-    is_alnum = list(fin.read())
+def __getattr__(name):
+    """PEP 562 module-level lazy loader for file-backed uniprops."""
+    if name in _file_backed:
+        if name not in _cache:
+            path = os.path.join(perluniprops_dir, _file_backed[name])
+            with open(path, encoding='utf-8') as fin:
+                _cache[name] = list(fin.read())
+        return _cache[name]
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
-with io.open(perluniprops_dir+'IsLower.txt', 'r', encoding='utf8') as fin:
-    is_lower = list(fin.read())
+is_n = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\xb2',
+    '\xb3', '\xb9', '\xbc', '\xbd', '\xbe', '\u0660', '\u0661', '\u0662',
+    '\u0663', '\u0664', '\u0665', '\u0666', '\u0667', '\u0668', '\u0669',
+    '\u06f0', '\u06f1', '\u06f2', '\u06f3', '\u06f4', '\u06f5', '\u06f6',
+    '\u06f7', '\u06f8', '\u06f9', '\u07c0', '\u07c1', '\u07c2', '\u07c3',
+    '\u07c4', '\u07c5', '\u07c6', '\u07c7', '\u07c8', '\u07c9', '\u0966',
+    '\u0967', '\u0968', '\u0969', '\u096a', '\u096b', '\u096c', '\u096d',
+    '\u096e', '\u096f', '\u09e6', '\u09e7', '\u09e8', '\u09e9', '\u09ea',
+    '\u09eb', '\u09ec', '\u09ed', '\u09ee', '\u09ef', '\u09f4', '\u09f5',
+    '\u09f6', '\u09f7', '\u09f8', '\u09f9', '\u0a66', '\u0a67', '\u0a68',
+    '\u0a69', '\u0a6a', '\u0a6b', '\u0a6c', '\u0a6d', '\u0a6e', '\u0a6f',
+    '\u0ae6', '\u0ae7', '\u0ae8', '\u0ae9', '\u0aea', '\u0aeb', '\u0aec',
+    '\u0aed', '\u0aee', '\u0aef', '\u0b66', '\u0b67', '\u0b68', '\u0b69',
+    '\u0b6a', '\u0b6b', '\u0b6c', '\u0b6d', '\u0b6e', '\u0b6f', '\u0b72',
+    '\u0b73', '\u0b74', '\u0b75', '\u0b76', '\u0b77', '\u0be6', '\u0be7',
+    '\u0be8', '\u0be9', '\u0bea', '\u0beb', '\u0bec', '\u0bed', '\u0bee',
+    '\u0bef', '\u0bf0', '\u0bf1', '\u0bf2', '\u0c66', '\u0c67', '\u0c68',
+    '\u0c69', '\u0c6a', '\u0c6b', '\u0c6c', '\u0c6d', '\u0c6e', '\u0c6f',
+    '\u0c78', '\u0c79', '\u0c7a', '\u0c7b', '\u0c7c', '\u0c7d', '\u0c7e',
+    '\u0ce6', '\u0ce7', '\u0ce8', '\u0ce9', '\u0cea', '\u0ceb', '\u0cec',
+    '\u0ced', '\u0cee', '\u0cef', '\u0d66', '\u0d67', '\u0d68', '\u0d69',
+    '\u0d6a', '\u0d6b', '\u0d6c', '\u0d6d', '\u0d6e', '\u0d6f', '\u0d70',
+    '\u0d71', '\u0d72', '\u0d73', '\u0d74', '\u0d75', '\u0e50', '\u0e51',
+    '\u0e52', '\u0e53', '\u0e54', '\u0e55', '\u0e56', '\u0e57', '\u0e58',
+    '\u0e59', '\u0ed0', '\u0ed1', '\u0ed2', '\u0ed3', '\u0ed4', '\u0ed5',
+    '\u0ed6', '\u0ed7', '\u0ed8', '\u0ed9', '\u0f20', '\u0f21', '\u0f22',
+    '\u0f23', '\u0f24', '\u0f25', '\u0f26', '\u0f27', '\u0f28', '\u0f29',
+    '\u0f2a', '\u0f2b', '\u0f2c', '\u0f2d', '\u0f2e', '\u0f2f', '\u0f30',
+    '\u0f31', '\u0f32', '\u0f33', '\u1040', '\u1041', '\u1042', '\u1043',
+    '\u1044', '\u1045', '\u1046', '\u1047', '\u1048', '\u1049', '\u1090',
+    '\u1091', '\u1092', '\u1093', '\u1094', '\u1095', '\u1096', '\u1097',
+    '\u1098', '\u1099', '\u1369', '\u136a', '\u136b', '\u136c', '\u136d',
+    '\u136e', '\u136f', '\u1370', '\u1371', '\u1372', '\u1373', '\u1374',
+    '\u1375', '\u1376', '\u1377', '\u1378', '\u1379', '\u137a', '\u137b',
+    '\u137c', '\u16ee', '\u16ef', '\u16f0', '\u17e0', '\u17e1', '\u17e2',
+    '\u17e3', '\u17e4', '\u17e5', '\u17e6', '\u17e7', '\u17e8', '\u17e9',
+    '\u17f0', '\u17f1', '\u17f2', '\u17f3', '\u17f4', '\u17f5', '\u17f6',
+    '\u17f7', '\u17f8', '\u17f9', '\u1810', '\u1811', '\u1812', '\u1813',
+    '\u1814', '\u1815', '\u1816', '\u1817', '\u1818', '\u1819', '\u1946',
+    '\u1947', '\u1948', '\u1949', '\u194a', '\u194b', '\u194c', '\u194d',
+    '\u194e', '\u194f', '\u19d0', '\u19d1', '\u19d2', '\u19d3', '\u19d4',
+    '\u19d5', '\u19d6', '\u19d7', '\u19d8', '\u19d9', '\u19da', '\u1a80',
+    '\u1a81', '\u1a82', '\u1a83', '\u1a84', '\u1a85', '\u1a86', '\u1a87',
+    '\u1a88', '\u1a89', '\u1a90', '\u1a91', '\u1a92', '\u1a93', '\u1a94',
+    '\u1a95', '\u1a96', '\u1a97', '\u1a98', '\u1a99', '\u1b50', '\u1b51',
+    '\u1b52', '\u1b53', '\u1b54', '\u1b55', '\u1b56', '\u1b57', '\u1b58',
+    '\u1b59', '\u1bb0', '\u1bb1', '\u1bb2', '\u1bb3', '\u1bb4', '\u1bb5',
+    '\u1bb6', '\u1bb7', '\u1bb8', '\u1bb9', '\u1c40', '\u1c41', '\u1c42',
+    '\u1c43', '\u1c44', '\u1c45', '\u1c46', '\u1c47', '\u1c48', '\u1c49',
+    '\u1c50', '\u1c51', '\u1c52', '\u1c53', '\u1c54', '\u1c55', '\u1c56',
+    '\u1c57', '\u1c58', '\u1c59', '\u2070', '\u2074', '\u2075', '\u2076',
+    '\u2077', '\u2078', '\u2079', '\u2080', '\u2081', '\u2082', '\u2083',
+    '\u2084', '\u2085', '\u2086', '\u2087', '\u2088', '\u2089', '\u2150',
+    '\u2151', '\u2152', '\u2153', '\u2154', '\u2155', '\u2156', '\u2157',
+    '\u2158', '\u2159', '\u215a', '\u215b', '\u215c', '\u215d', '\u215e',
+    '\u215f', '\u2160', '\u2161', '\u2162', '\u2163', '\u2164', '\u2165',
+    '\u2166', '\u2167', '\u2168', '\u2169', '\u216a', '\u216b', '\u216c',
+    '\u216d', '\u216e', '\u216f', '\u2170', '\u2171', '\u2172', '\u2173',
+    '\u2174', '\u2175', '\u2176', '\u2177', '\u2178', '\u2179', '\u217a',
+    '\u217b', '\u217c', '\u217d', '\u217e', '\u217f', '\u2180', '\u2181',
+    '\u2182', '\u2185', '\u2186', '\u2187', '\u2188', '\u2189', '\u2460',
+    '\u2461', '\u2462', '\u2463', '\u2464', '\u2465', '\u2466', '\u2467',
+    '\u2468', '\u2469', '\u246a', '\u246b', '\u246c', '\u246d', '\u246e',
+    '\u246f', '\u2470', '\u2471', '\u2472', '\u2473', '\u2474', '\u2475',
+    '\u2476', '\u2477', '\u2478', '\u2479', '\u247a', '\u247b', '\u247c',
+    '\u247d', '\u247e', '\u247f', '\u2480', '\u2481', '\u2482', '\u2483',
+    '\u2484', '\u2485', '\u2486', '\u2487', '\u2488', '\u2489', '\u248a',
+    '\u248b', '\u248c', '\u248d', '\u248e', '\u248f', '\u2490', '\u2491',
+    '\u2492', '\u2493', '\u2494', '\u2495', '\u2496', '\u2497', '\u2498',
+    '\u2499', '\u249a', '\u249b', '\u24ea', '\u24eb', '\u24ec', '\u24ed',
+    '\u24ee', '\u24ef', '\u24f0', '\u24f1', '\u24f2', '\u24f3', '\u24f4',
+    '\u24f5', '\u24f6', '\u24f7', '\u24f8', '\u24f9', '\u24fa', '\u24fb',
+    '\u24fc', '\u24fd', '\u24fe', '\u24ff', '\u2776', '\u2777', '\u2778',
+    '\u2779', '\u277a', '\u277b', '\u277c', '\u277d', '\u277e', '\u277f',
+    '\u2780', '\u2781', '\u2782', '\u2783', '\u2784', '\u2785', '\u2786',
+    '\u2787', '\u2788', '\u2789', '\u278a', '\u278b', '\u278c', '\u278d',
+    '\u278e', '\u278f', '\u2790', '\u2791', '\u2792', '\u2793', '\u2cfd',
+    '\u3192', '\u3193', '\u3194', '\u3195', '\u3220', '\u3221', '\u3222',
+    '\u3223', '\u3224', '\u3225', '\u3226', '\u3227', '\u3228', '\u3229',
+    '\u3248', '\u3249', '\u324a', '\u324b', '\u324c', '\u324d', '\u324e',
+    '\u324f', '\u3251', '\u3252', '\u3253', '\u3254', '\u3255', '\u3256',
+    '\u3257', '\u3258', '\u3259', '\u325a', '\u325b', '\u325c', '\u325d',
+    '\u325e', '\u325f', '\u3280', '\u3281', '\u3282', '\u3283', '\u3284',
+    '\u3285', '\u3286', '\u3287', '\u3288', '\u3289', '\u32b1', '\u32b2',
+    '\u32b3', '\u32b4', '\u32b5', '\u32b6', '\u32b7', '\u32b8', '\u32b9',
+    '\u32ba', '\u32bb', '\u32bc', '\u32bd', '\u32be', '\u32bf', '\ua620',
+    '\ua621', '\ua622', '\ua623', '\ua624', '\ua625', '\ua626', '\ua627',
+    '\ua628', '\ua629', '\ua6e6', '\ua6e7', '\ua6e8', '\ua6e9', '\ua6ea',
+    '\ua6eb', '\ua6ec', '\ua6ed', '\ua6ee', '\ua6ef', '\ua830', '\ua831',
+    '\ua832', '\ua833', '\ua834', '\ua835', '\ua8d0', '\ua8d1', '\ua8d2',
+    '\ua8d3', '\ua8d4', '\ua8d5', '\ua8d6', '\ua8d7', '\ua8d8', '\ua8d9',
+    '\ua900', '\ua901', '\ua902', '\ua903', '\ua904', '\ua905', '\ua906',
+    '\ua907', '\ua908', '\ua909', '\ua9d0', '\ua9d1', '\ua9d2', '\ua9d3',
+    '\ua9d4', '\ua9d5', '\ua9d6', '\ua9d7', '\ua9d8', '\ua9d9', '\uaa50',
+    '\uaa51', '\uaa52', '\uaa53', '\uaa54', '\uaa55', '\uaa56', '\uaa57',
+    '\uaa58', '\uaa59', '\uabf0', '\uabf1', '\uabf2', '\uabf3', '\uabf4',
+    '\uabf5', '\uabf6', '\uabf7', '\uabf8', '\uabf9', '\uff10', '\uff11',
+    '\uff12', '\uff13', '\uff14', '\uff15', '\uff16', '\uff17', '\uff18',
+    '\uff19']
 
-with io.open(perluniprops_dir+'IsUpper.txt', 'r', encoding='utf8') as fin:
-    is_upper = list(fin.read())
-
-is_n = [u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'\xb2',
-    u'\xb3', u'\xb9', u'\xbc', u'\xbd', u'\xbe', u'\u0660', u'\u0661', u'\u0662',
-    u'\u0663', u'\u0664', u'\u0665', u'\u0666', u'\u0667', u'\u0668', u'\u0669',
-    u'\u06f0', u'\u06f1', u'\u06f2', u'\u06f3', u'\u06f4', u'\u06f5', u'\u06f6',
-    u'\u06f7', u'\u06f8', u'\u06f9', u'\u07c0', u'\u07c1', u'\u07c2', u'\u07c3',
-    u'\u07c4', u'\u07c5', u'\u07c6', u'\u07c7', u'\u07c8', u'\u07c9', u'\u0966',
-    u'\u0967', u'\u0968', u'\u0969', u'\u096a', u'\u096b', u'\u096c', u'\u096d',
-    u'\u096e', u'\u096f', u'\u09e6', u'\u09e7', u'\u09e8', u'\u09e9', u'\u09ea',
-    u'\u09eb', u'\u09ec', u'\u09ed', u'\u09ee', u'\u09ef', u'\u09f4', u'\u09f5',
-    u'\u09f6', u'\u09f7', u'\u09f8', u'\u09f9', u'\u0a66', u'\u0a67', u'\u0a68',
-    u'\u0a69', u'\u0a6a', u'\u0a6b', u'\u0a6c', u'\u0a6d', u'\u0a6e', u'\u0a6f',
-    u'\u0ae6', u'\u0ae7', u'\u0ae8', u'\u0ae9', u'\u0aea', u'\u0aeb', u'\u0aec',
-    u'\u0aed', u'\u0aee', u'\u0aef', u'\u0b66', u'\u0b67', u'\u0b68', u'\u0b69',
-    u'\u0b6a', u'\u0b6b', u'\u0b6c', u'\u0b6d', u'\u0b6e', u'\u0b6f', u'\u0b72',
-    u'\u0b73', u'\u0b74', u'\u0b75', u'\u0b76', u'\u0b77', u'\u0be6', u'\u0be7',
-    u'\u0be8', u'\u0be9', u'\u0bea', u'\u0beb', u'\u0bec', u'\u0bed', u'\u0bee',
-    u'\u0bef', u'\u0bf0', u'\u0bf1', u'\u0bf2', u'\u0c66', u'\u0c67', u'\u0c68',
-    u'\u0c69', u'\u0c6a', u'\u0c6b', u'\u0c6c', u'\u0c6d', u'\u0c6e', u'\u0c6f',
-    u'\u0c78', u'\u0c79', u'\u0c7a', u'\u0c7b', u'\u0c7c', u'\u0c7d', u'\u0c7e',
-    u'\u0ce6', u'\u0ce7', u'\u0ce8', u'\u0ce9', u'\u0cea', u'\u0ceb', u'\u0cec',
-    u'\u0ced', u'\u0cee', u'\u0cef', u'\u0d66', u'\u0d67', u'\u0d68', u'\u0d69',
-    u'\u0d6a', u'\u0d6b', u'\u0d6c', u'\u0d6d', u'\u0d6e', u'\u0d6f', u'\u0d70',
-    u'\u0d71', u'\u0d72', u'\u0d73', u'\u0d74', u'\u0d75', u'\u0e50', u'\u0e51',
-    u'\u0e52', u'\u0e53', u'\u0e54', u'\u0e55', u'\u0e56', u'\u0e57', u'\u0e58',
-    u'\u0e59', u'\u0ed0', u'\u0ed1', u'\u0ed2', u'\u0ed3', u'\u0ed4', u'\u0ed5',
-    u'\u0ed6', u'\u0ed7', u'\u0ed8', u'\u0ed9', u'\u0f20', u'\u0f21', u'\u0f22',
-    u'\u0f23', u'\u0f24', u'\u0f25', u'\u0f26', u'\u0f27', u'\u0f28', u'\u0f29',
-    u'\u0f2a', u'\u0f2b', u'\u0f2c', u'\u0f2d', u'\u0f2e', u'\u0f2f', u'\u0f30',
-    u'\u0f31', u'\u0f32', u'\u0f33', u'\u1040', u'\u1041', u'\u1042', u'\u1043',
-    u'\u1044', u'\u1045', u'\u1046', u'\u1047', u'\u1048', u'\u1049', u'\u1090',
-    u'\u1091', u'\u1092', u'\u1093', u'\u1094', u'\u1095', u'\u1096', u'\u1097',
-    u'\u1098', u'\u1099', u'\u1369', u'\u136a', u'\u136b', u'\u136c', u'\u136d',
-    u'\u136e', u'\u136f', u'\u1370', u'\u1371', u'\u1372', u'\u1373', u'\u1374',
-    u'\u1375', u'\u1376', u'\u1377', u'\u1378', u'\u1379', u'\u137a', u'\u137b',
-    u'\u137c', u'\u16ee', u'\u16ef', u'\u16f0', u'\u17e0', u'\u17e1', u'\u17e2',
-    u'\u17e3', u'\u17e4', u'\u17e5', u'\u17e6', u'\u17e7', u'\u17e8', u'\u17e9',
-    u'\u17f0', u'\u17f1', u'\u17f2', u'\u17f3', u'\u17f4', u'\u17f5', u'\u17f6',
-    u'\u17f7', u'\u17f8', u'\u17f9', u'\u1810', u'\u1811', u'\u1812', u'\u1813',
-    u'\u1814', u'\u1815', u'\u1816', u'\u1817', u'\u1818', u'\u1819', u'\u1946',
-    u'\u1947', u'\u1948', u'\u1949', u'\u194a', u'\u194b', u'\u194c', u'\u194d',
-    u'\u194e', u'\u194f', u'\u19d0', u'\u19d1', u'\u19d2', u'\u19d3', u'\u19d4',
-    u'\u19d5', u'\u19d6', u'\u19d7', u'\u19d8', u'\u19d9', u'\u19da', u'\u1a80',
-    u'\u1a81', u'\u1a82', u'\u1a83', u'\u1a84', u'\u1a85', u'\u1a86', u'\u1a87',
-    u'\u1a88', u'\u1a89', u'\u1a90', u'\u1a91', u'\u1a92', u'\u1a93', u'\u1a94',
-    u'\u1a95', u'\u1a96', u'\u1a97', u'\u1a98', u'\u1a99', u'\u1b50', u'\u1b51',
-    u'\u1b52', u'\u1b53', u'\u1b54', u'\u1b55', u'\u1b56', u'\u1b57', u'\u1b58',
-    u'\u1b59', u'\u1bb0', u'\u1bb1', u'\u1bb2', u'\u1bb3', u'\u1bb4', u'\u1bb5',
-    u'\u1bb6', u'\u1bb7', u'\u1bb8', u'\u1bb9', u'\u1c40', u'\u1c41', u'\u1c42',
-    u'\u1c43', u'\u1c44', u'\u1c45', u'\u1c46', u'\u1c47', u'\u1c48', u'\u1c49',
-    u'\u1c50', u'\u1c51', u'\u1c52', u'\u1c53', u'\u1c54', u'\u1c55', u'\u1c56',
-    u'\u1c57', u'\u1c58', u'\u1c59', u'\u2070', u'\u2074', u'\u2075', u'\u2076',
-    u'\u2077', u'\u2078', u'\u2079', u'\u2080', u'\u2081', u'\u2082', u'\u2083',
-    u'\u2084', u'\u2085', u'\u2086', u'\u2087', u'\u2088', u'\u2089', u'\u2150',
-    u'\u2151', u'\u2152', u'\u2153', u'\u2154', u'\u2155', u'\u2156', u'\u2157',
-    u'\u2158', u'\u2159', u'\u215a', u'\u215b', u'\u215c', u'\u215d', u'\u215e',
-    u'\u215f', u'\u2160', u'\u2161', u'\u2162', u'\u2163', u'\u2164', u'\u2165',
-    u'\u2166', u'\u2167', u'\u2168', u'\u2169', u'\u216a', u'\u216b', u'\u216c',
-    u'\u216d', u'\u216e', u'\u216f', u'\u2170', u'\u2171', u'\u2172', u'\u2173',
-    u'\u2174', u'\u2175', u'\u2176', u'\u2177', u'\u2178', u'\u2179', u'\u217a',
-    u'\u217b', u'\u217c', u'\u217d', u'\u217e', u'\u217f', u'\u2180', u'\u2181',
-    u'\u2182', u'\u2185', u'\u2186', u'\u2187', u'\u2188', u'\u2189', u'\u2460',
-    u'\u2461', u'\u2462', u'\u2463', u'\u2464', u'\u2465', u'\u2466', u'\u2467',
-    u'\u2468', u'\u2469', u'\u246a', u'\u246b', u'\u246c', u'\u246d', u'\u246e',
-    u'\u246f', u'\u2470', u'\u2471', u'\u2472', u'\u2473', u'\u2474', u'\u2475',
-    u'\u2476', u'\u2477', u'\u2478', u'\u2479', u'\u247a', u'\u247b', u'\u247c',
-    u'\u247d', u'\u247e', u'\u247f', u'\u2480', u'\u2481', u'\u2482', u'\u2483',
-    u'\u2484', u'\u2485', u'\u2486', u'\u2487', u'\u2488', u'\u2489', u'\u248a',
-    u'\u248b', u'\u248c', u'\u248d', u'\u248e', u'\u248f', u'\u2490', u'\u2491',
-    u'\u2492', u'\u2493', u'\u2494', u'\u2495', u'\u2496', u'\u2497', u'\u2498',
-    u'\u2499', u'\u249a', u'\u249b', u'\u24ea', u'\u24eb', u'\u24ec', u'\u24ed',
-    u'\u24ee', u'\u24ef', u'\u24f0', u'\u24f1', u'\u24f2', u'\u24f3', u'\u24f4',
-    u'\u24f5', u'\u24f6', u'\u24f7', u'\u24f8', u'\u24f9', u'\u24fa', u'\u24fb',
-    u'\u24fc', u'\u24fd', u'\u24fe', u'\u24ff', u'\u2776', u'\u2777', u'\u2778',
-    u'\u2779', u'\u277a', u'\u277b', u'\u277c', u'\u277d', u'\u277e', u'\u277f',
-    u'\u2780', u'\u2781', u'\u2782', u'\u2783', u'\u2784', u'\u2785', u'\u2786',
-    u'\u2787', u'\u2788', u'\u2789', u'\u278a', u'\u278b', u'\u278c', u'\u278d',
-    u'\u278e', u'\u278f', u'\u2790', u'\u2791', u'\u2792', u'\u2793', u'\u2cfd',
-    u'\u3192', u'\u3193', u'\u3194', u'\u3195', u'\u3220', u'\u3221', u'\u3222',
-    u'\u3223', u'\u3224', u'\u3225', u'\u3226', u'\u3227', u'\u3228', u'\u3229',
-    u'\u3248', u'\u3249', u'\u324a', u'\u324b', u'\u324c', u'\u324d', u'\u324e',
-    u'\u324f', u'\u3251', u'\u3252', u'\u3253', u'\u3254', u'\u3255', u'\u3256',
-    u'\u3257', u'\u3258', u'\u3259', u'\u325a', u'\u325b', u'\u325c', u'\u325d',
-    u'\u325e', u'\u325f', u'\u3280', u'\u3281', u'\u3282', u'\u3283', u'\u3284',
-    u'\u3285', u'\u3286', u'\u3287', u'\u3288', u'\u3289', u'\u32b1', u'\u32b2',
-    u'\u32b3', u'\u32b4', u'\u32b5', u'\u32b6', u'\u32b7', u'\u32b8', u'\u32b9',
-    u'\u32ba', u'\u32bb', u'\u32bc', u'\u32bd', u'\u32be', u'\u32bf', u'\ua620',
-    u'\ua621', u'\ua622', u'\ua623', u'\ua624', u'\ua625', u'\ua626', u'\ua627',
-    u'\ua628', u'\ua629', u'\ua6e6', u'\ua6e7', u'\ua6e8', u'\ua6e9', u'\ua6ea',
-    u'\ua6eb', u'\ua6ec', u'\ua6ed', u'\ua6ee', u'\ua6ef', u'\ua830', u'\ua831',
-    u'\ua832', u'\ua833', u'\ua834', u'\ua835', u'\ua8d0', u'\ua8d1', u'\ua8d2',
-    u'\ua8d3', u'\ua8d4', u'\ua8d5', u'\ua8d6', u'\ua8d7', u'\ua8d8', u'\ua8d9',
-    u'\ua900', u'\ua901', u'\ua902', u'\ua903', u'\ua904', u'\ua905', u'\ua906',
-    u'\ua907', u'\ua908', u'\ua909', u'\ua9d0', u'\ua9d1', u'\ua9d2', u'\ua9d3',
-    u'\ua9d4', u'\ua9d5', u'\ua9d6', u'\ua9d7', u'\ua9d8', u'\ua9d9', u'\uaa50',
-    u'\uaa51', u'\uaa52', u'\uaa53', u'\uaa54', u'\uaa55', u'\uaa56', u'\uaa57',
-    u'\uaa58', u'\uaa59', u'\uabf0', u'\uabf1', u'\uabf2', u'\uabf3', u'\uabf4',
-    u'\uabf5', u'\uabf6', u'\uabf7', u'\uabf8', u'\uabf9', u'\uff10', u'\uff11',
-    u'\uff12', u'\uff13', u'\uff14', u'\uff15', u'\uff16', u'\uff17', u'\uff18',
-    u'\uff19']
-
-# Shield the top level imports from all the local variables.
+# `__all__` intentionally excludes the file-backed names (is_alpha, is_alnum,
+# is_lower, is_upper, is_so). Listing them would cause `from perluniprops
+# import *` to eagerly resolve every lazy name, defeating lazy loading.
+# They are still accessible via explicit attribute access or explicit import.
 __all__ = ['close_punctuation', 'open_punctuation', 'currency_symbol',
-           'is_sc', 'is_alnum', 'is_alpha', 'is_lower', 'is_upper', 'is_n', 'is_so']
+           'is_sc', 'is_n', 'fetch_unichars']

@@ -15,188 +15,188 @@ from collections import namedtuple
 
 VietTone = namedtuple('Tones', 'ngang huyen sac hoi nga nang')
 
-viet_tones = VietTone(ngang=u'',       # mid level
-                      sac=u'\u0301',   # high rising
-                      huyen=u'\u0300', # low falling
-                      hoi=u'\u0309',   # mid dipping-rising
-                      nga=u'\u0303',   # high breaking-rising
-                      nang=u'\u0323'   # low falling constricted
+viet_tones = VietTone(ngang='',       # mid level
+                      sac='\u0301',   # high rising
+                      huyen='\u0300', # low falling
+                      hoi='\u0309',   # mid dipping-rising
+                      nga='\u0303',   # high breaking-rising
+                      nang='\u0323'   # low falling constricted
                      )
 
 # A vowels
-upper_a_ngang = u'A'
-upper_a_sac = u'\u00c1'     # u'Á'
-upper_a_huyen = u'\u00c0'   # u'À'
-upper_a_hoi = u'\u1ea2'     # u'Ả'
-upper_a_nga = u'\u00c3'     # u'Ã'
-upper_a_nang = u'\u1ea0'    # u'Ạ'
+upper_a_ngang = 'A'
+upper_a_sac = '\u00c1'     # 'Á'
+upper_a_huyen = '\u00c0'   # 'À'
+upper_a_hoi = '\u1ea2'     # 'Ả'
+upper_a_nga = '\u00c3'     # 'Ã'
+upper_a_nang = '\u1ea0'    # 'Ạ'
 # a vowels
-lower_a_ngang = u'a'
-lower_a_sac = u'\u00e1'     # u'á'
-lower_a_huyen = u'\u00e0'   # u'à'
-lower_a_hoi = u'\u1ea3'     # u'ả'
-lower_a_nga = u'\u00e3'     # u'ã'
-lower_a_nang = u'\u1ea1'    # u'ạ'
+lower_a_ngang = 'a'
+lower_a_sac = '\u00e1'     # 'á'
+lower_a_huyen = '\u00e0'   # 'à'
+lower_a_hoi = '\u1ea3'     # 'ả'
+lower_a_nga = '\u00e3'     # 'ã'
+lower_a_nang = '\u1ea1'    # 'ạ'
 # A8 vowels (Telex: Aw)
-upper_abreve_ngang = u'\u0102'   # u'Ă'
-upper_abreve_sac = u'\u1eae'     # u'Ắ'
-upper_abreve_huyen = u'\u1eb0'   # u'Ằ'
-upper_abreve_hoi = u'\u1eb2'     # u'Ẳ'
-upper_abreve_nga = u'\u1eb4'     # u'Ẵ'
-upper_abreve_nang = u'\u1eb6'    # u'Ặ'
+upper_abreve_ngang = '\u0102'   # 'Ă'
+upper_abreve_sac = '\u1eae'     # 'Ắ'
+upper_abreve_huyen = '\u1eb0'   # 'Ằ'
+upper_abreve_hoi = '\u1eb2'     # 'Ẳ'
+upper_abreve_nga = '\u1eb4'     # 'Ẵ'
+upper_abreve_nang = '\u1eb6'    # 'Ặ'
 # a8 vowels (Telex: aa)
-lower_abreve_ngang = u'\u0103'   # u'ă'
-lower_abreve_sac = u'\u1eaf'     # u'ắ'
-lower_abreve_huyen = u'\u1eb1'   # u'ằ'
-lower_abreve_hoi = u'\u1eb3'     # u'ẳ'
-lower_abreve_nga = u'\u1eb5'     # u'ẵ'
-lower_abreve_nang = u'\u1eb7'    # u'ặ'
+lower_abreve_ngang = '\u0103'   # 'ă'
+lower_abreve_sac = '\u1eaf'     # 'ắ'
+lower_abreve_huyen = '\u1eb1'   # 'ằ'
+lower_abreve_hoi = '\u1eb3'     # 'ẳ'
+lower_abreve_nga = '\u1eb5'     # 'ẵ'
+lower_abreve_nang = '\u1eb7'    # 'ặ'
 # A6 vowels (Telex: Aa)
-upper_ahat_ngang = u'\u00c2'   # u'Â'
-upper_ahat_sac = u'\u1ea4'     # u'Ấ'
-upper_ahat_huyen = u'\u1ea6'   # u'Ầ'
-upper_ahat_hoi = u'\u1ea8'     # u'Ẩ'
-upper_ahat_nga = u'\u1eaa'     # u'Ẫ'
-upper_ahat_nang = u'\u1eac'    # u'Ậ'
+upper_ahat_ngang = '\u00c2'   # 'Â'
+upper_ahat_sac = '\u1ea4'     # 'Ấ'
+upper_ahat_huyen = '\u1ea6'   # 'Ầ'
+upper_ahat_hoi = '\u1ea8'     # 'Ẩ'
+upper_ahat_nga = '\u1eaa'     # 'Ẫ'
+upper_ahat_nang = '\u1eac'    # 'Ậ'
 # a6 vowels (Telex: aa)
-lower_ahat_ngang = u'\u00e2'   # u'â'
-lower_ahat_sac = u'\u1ea5'     # u'ấ'
-lower_ahat_huyen = u'\u1ea7'   # u'ầ'
-lower_ahat_hoi = u'\u1ea9'     # u'ẩ'
-lower_ahat_nga = u'\u1eab'     # u'ẫ'
-lower_ahat_nang = u'\u1ead'    # u'ậ'
+lower_ahat_ngang = '\u00e2'   # 'â'
+lower_ahat_sac = '\u1ea5'     # 'ấ'
+lower_ahat_huyen = '\u1ea7'   # 'ầ'
+lower_ahat_hoi = '\u1ea9'     # 'ẩ'
+lower_ahat_nga = '\u1eab'     # 'ẫ'
+lower_ahat_nang = '\u1ead'    # 'ậ'
 
 # E vowels
-upper_e_ngang = u'E'
-upper_e_sac = u'\u00c9'     # u'É'
-upper_e_huyen = u'\u00c8'   # u'È'
-upper_e_hoi = u'\u1eba'     # u'Ẻ'
-upper_e_nga = u'\u1ebc'     # u'Ẽ'
-upper_e_nang = u'\u1eb8'    # u'Ẹ'
+upper_e_ngang = 'E'
+upper_e_sac = '\u00c9'     # 'É'
+upper_e_huyen = '\u00c8'   # 'È'
+upper_e_hoi = '\u1eba'     # 'Ẻ'
+upper_e_nga = '\u1ebc'     # 'Ẽ'
+upper_e_nang = '\u1eb8'    # 'Ẹ'
 # e vowels
-lower_e_ngang = u'e'
-lower_e_sac = u'\u00e9'     # u'é'
-lower_e_huyen = u'\u00e8'   # u'è'
-lower_e_hoi = u'\u1ebb'     # u'ẻ'
-lower_e_nga = u'\u1ebd'     # u'ẽ'
-lower_e_nang = u'\u1eb9'    # u'ẹ'
+lower_e_ngang = 'e'
+lower_e_sac = '\u00e9'     # 'é'
+lower_e_huyen = '\u00e8'   # 'è'
+lower_e_hoi = '\u1ebb'     # 'ẻ'
+lower_e_nga = '\u1ebd'     # 'ẽ'
+lower_e_nang = '\u1eb9'    # 'ẹ'
 # E6 vowels (TELEX: Ee)
-upper_ehat_ngang = u'\u00ca'   # u'Ê'
-upper_ehat_sac = u'\u1ebe'     # u'Ế'
-upper_ehat_huyen = u'\u1ec0'   # u'Ề'
-upper_ehat_hoi = u'\u1ec2'     # u'Ể'
-upper_ehat_nga = u'\u1ec4'     # u'Ễ'
-upper_ehat_nang = u'\u1ec6'    # u'Ệ'
+upper_ehat_ngang = '\u00ca'   # 'Ê'
+upper_ehat_sac = '\u1ebe'     # 'Ế'
+upper_ehat_huyen = '\u1ec0'   # 'Ề'
+upper_ehat_hoi = '\u1ec2'     # 'Ể'
+upper_ehat_nga = '\u1ec4'     # 'Ễ'
+upper_ehat_nang = '\u1ec6'    # 'Ệ'
 # e6 vowels (TELEX: ee)
-lower_ehat_ngang = u'\u00ea'   # u'ê'
-lower_ehat_sac = u'\u1ebf'     # u'ế'
-lower_ehat_huyen = u'\u1ec1'   # u'ề'
-lower_ehat_hoi = u'\u1ec3'     # u'ể'
-lower_ehat_nga = u'\u1ec5'     # u'ễ'
-lower_ehat_nang = u'\u1ec7'    # u'ệ'
+lower_ehat_ngang = '\u00ea'   # 'ê'
+lower_ehat_sac = '\u1ebf'     # 'ế'
+lower_ehat_huyen = '\u1ec1'   # 'ề'
+lower_ehat_hoi = '\u1ec3'     # 'ể'
+lower_ehat_nga = '\u1ec5'     # 'ễ'
+lower_ehat_nang = '\u1ec7'    # 'ệ'
 
 # I vowels
-upper_i_ngang = u'I'
-upper_i_sac = u'\u00cd'        # u'Í'
-upper_i_huyen = u'\u00cc'      # u'Ì'
-upper_i_hoi = u'\u1ec8'        # u'Ỉ'
-upper_i_nga = u'\u0128'        # u'Ĩ'
-upper_i_nang = u'\u1eca'       # u'Ị'
+upper_i_ngang = 'I'
+upper_i_sac = '\u00cd'        # 'Í'
+upper_i_huyen = '\u00cc'      # 'Ì'
+upper_i_hoi = '\u1ec8'        # 'Ỉ'
+upper_i_nga = '\u0128'        # 'Ĩ'
+upper_i_nang = '\u1eca'       # 'Ị'
 # i vowels
-lower_i_ngang = u'i'
-lower_i_sac = u'\u00ed'        # u'í'
-lower_i_huyen = u'\u00ec'      # u'ì'
-lower_i_hoi = u'\u1ec9'        # u'ỉ'
-lower_i_nga = u'\u0129'        # u'ĩ'
-lower_i_nang = u'\u1ecb'       # u'ị'
+lower_i_ngang = 'i'
+lower_i_sac = '\u00ed'        # 'í'
+lower_i_huyen = '\u00ec'      # 'ì'
+lower_i_hoi = '\u1ec9'        # 'ỉ'
+lower_i_nga = '\u0129'        # 'ĩ'
+lower_i_nang = '\u1ecb'       # 'ị'
 
 # O vowels
-upper_o_ngang = u'O'
-upper_o_sac = u'\u00d3'     # u'Ó'
-upper_o_huyen = u'\u00d2'   # u'Ò'
-upper_o_hoi = u'\u1ece'     # u'Ỏ'
-upper_o_nga = u'\u1ed5'     # u'Õ'
-upper_o_nang = u'\u1ecc'    # u'Ọ'
+upper_o_ngang = 'O'
+upper_o_sac = '\u00d3'     # 'Ó'
+upper_o_huyen = '\u00d2'   # 'Ò'
+upper_o_hoi = '\u1ece'     # 'Ỏ'
+upper_o_nga = '\u1ed5'     # 'Õ'
+upper_o_nang = '\u1ecc'    # 'Ọ'
 # o vowels
-lower_o_ngang = u'o'
-lower_o_sac = u'\u00f3'     # u'ó'
-lower_o_huyen = u'\u00f2'   # u'ò'
-lower_o_hoi = u'\u1ecf'     # u'ỏ'
-lower_o_nga = u'\u00f5'     # u'õ'
-lower_o_nang = u'\u1ecd'    # u'ọ'
+lower_o_ngang = 'o'
+lower_o_sac = '\u00f3'     # 'ó'
+lower_o_huyen = '\u00f2'   # 'ò'
+lower_o_hoi = '\u1ecf'     # 'ỏ'
+lower_o_nga = '\u00f5'     # 'õ'
+lower_o_nang = '\u1ecd'    # 'ọ'
 
 # O6 vowels (TELEX: Oo)
-upper_ohat_ngang = u'\u00d4'   # u'Ô'
-upper_ohat_sac = u'\u1ed0'     # u'Ố'
-upper_ohat_huyen = u'\u1ed2'   # u'Ồ'
-upper_ohat_hoi = u'\u1ed4'     # u'Ổ'
-upper_ohat_nga = u'\u1ed6'     # u'Ỗ'
-upper_ohat_nang = u'\u1ed8'    # u'Ộ'
+upper_ohat_ngang = '\u00d4'   # 'Ô'
+upper_ohat_sac = '\u1ed0'     # 'Ố'
+upper_ohat_huyen = '\u1ed2'   # 'Ồ'
+upper_ohat_hoi = '\u1ed4'     # 'Ổ'
+upper_ohat_nga = '\u1ed6'     # 'Ỗ'
+upper_ohat_nang = '\u1ed8'    # 'Ộ'
 # o6 vowels (TELEX: oo)
-lower_ohat_ngang = u'\u00f4'   # u'ô'
-lower_ohat_sac = u'\u1ed1'     # u'ố'
-lower_ohat_huyen = u'\u1ed3'   # u'ồ'
-lower_ohat_hoi = u'\u1ed5'     # u'ổ'
-lower_ohat_nga = u'\u1ed7'     # u'ỗ'
-lower_ohat_nang = u'\u1ed9'    # u'ộ'
+lower_ohat_ngang = '\u00f4'   # 'ô'
+lower_ohat_sac = '\u1ed1'     # 'ố'
+lower_ohat_huyen = '\u1ed3'   # 'ồ'
+lower_ohat_hoi = '\u1ed5'     # 'ổ'
+lower_ohat_nga = '\u1ed7'     # 'ỗ'
+lower_ohat_nang = '\u1ed9'    # 'ộ'
 # O7  vowels (TELEX: Ow)
-upper_oplus_ngang = u'\u01a0'  # u'Ơ'
-upper_oplus_sac = u'\u1eda'    # u'Ớ'
-upper_oplus_huyen = u'\u1edc'  # u'Ờ'
-upper_oplus_hoi = u'\u1ede'    # u'Ở'
-upper_oplus_nga = u'\u1ee0'    # u'Ỡ'
-upper_oplus_nang = u'\u1ee2'   # u'Ợ'
+upper_oplus_ngang = '\u01a0'  # 'Ơ'
+upper_oplus_sac = '\u1eda'    # 'Ớ'
+upper_oplus_huyen = '\u1edc'  # 'Ờ'
+upper_oplus_hoi = '\u1ede'    # 'Ở'
+upper_oplus_nga = '\u1ee0'    # 'Ỡ'
+upper_oplus_nang = '\u1ee2'   # 'Ợ'
 # o7  vowels (TELEX: Ow)
-lower_oplus_ngang = u'\u01a1'  # ơ
-lower_oplus_sac = u'\u1edb'    # u'ớ'
-lower_oplus_huyen = u'\u1edd'  # u'ờ'
-lower_oplus_hoi = u'\u1edf'    # u'ở'
-lower_oplus_nga = u'\u1ee1'    # u'ỡ'
-lower_oplus_nang = u'\u1ee3'   # u'ợ'
+lower_oplus_ngang = '\u01a1'  # ơ
+lower_oplus_sac = '\u1edb'    # 'ớ'
+lower_oplus_huyen = '\u1edd'  # 'ờ'
+lower_oplus_hoi = '\u1edf'    # 'ở'
+lower_oplus_nga = '\u1ee1'    # 'ỡ'
+lower_oplus_nang = '\u1ee3'   # 'ợ'
 
 # U vowels
-upper_u_ngang = u'U'
-upper_u_sac = u'\u00da'       # u'Ú'
-upper_u_huyen = u'\u00d9'     # u'Ù'
-upper_u_hoi = u'\u1ee6'       # u'Ủ'
-upper_u_nga = u'\u0168'       # u'ũ'
-upper_u_nang = u'\u1ee4'      # u'Ụ'
+upper_u_ngang = 'U'
+upper_u_sac = '\u00da'       # 'Ú'
+upper_u_huyen = '\u00d9'     # 'Ù'
+upper_u_hoi = '\u1ee6'       # 'Ủ'
+upper_u_nga = '\u0168'       # 'ũ'
+upper_u_nang = '\u1ee4'      # 'Ụ'
 # u vowels
-lower_u_ngang = u'u'
-lower_u_sac = u'\u00fa'       # u'ú'
-lower_u_huyen = u'\u00f9'     # u'ù'
-lower_u_hoi = u'\u1ee7'       # u'ủ'
-lower_u_nga = u'\u0169'       # u'ũ'
-lower_u_nang = u'\u1ee5'      # u'ụ'
+lower_u_ngang = 'u'
+lower_u_sac = '\u00fa'       # 'ú'
+lower_u_huyen = '\u00f9'     # 'ù'
+lower_u_hoi = '\u1ee7'       # 'ủ'
+lower_u_nga = '\u0169'       # 'ũ'
+lower_u_nang = '\u1ee5'      # 'ụ'
 # U7 vowels (TELEX: Uw)
-upper_uplus_ngang = u'\u01af' # u'Ư'
-upper_uplus_sac = u'\u1ee8'   # u'Ừ'
-upper_uplus_huyen = u'\u1eea' # u'Ứ'
-upper_uplus_hoi = u'\u1eec'   # u'Ử'
-upper_uplus_nga = u'\u1eee'   # u'Ữ'
-upper_uplus_nang = u'\u1ef0'  # u'Ự'
+upper_uplus_ngang = '\u01af' # 'Ư'
+upper_uplus_sac = '\u1ee8'   # 'Ừ'
+upper_uplus_huyen = '\u1eea' # 'Ứ'
+upper_uplus_hoi = '\u1eec'   # 'Ử'
+upper_uplus_nga = '\u1eee'   # 'Ữ'
+upper_uplus_nang = '\u1ef0'  # 'Ự'
 # u7 vowels (TELEX: uw)
-lower_uplus_ngang = u'\u01b0' # u'ư'
-lower_uplus_sac = u'\u1ee9'   # u'ừ'
-lower_uplus_huyen = u'\u1eeb' # u'ứ'
-lower_uplus_hoi = u'\u1eed'   # u'ử'
-lower_uplus_nga = u'\u1eef'   # u'ữ'
-lower_uplus_nang = u'\u1ef1'  # u'ự'
+lower_uplus_ngang = '\u01b0' # 'ư'
+lower_uplus_sac = '\u1ee9'   # 'ừ'
+lower_uplus_huyen = '\u1eeb' # 'ứ'
+lower_uplus_hoi = '\u1eed'   # 'ử'
+lower_uplus_nga = '\u1eef'   # 'ữ'
+lower_uplus_nang = '\u1ef1'  # 'ự'
 
 # Y vowels
-upper_y_ngang = u'Y'
-upper_y_sac = u'\u00dd'   # u'Ý'
-upper_y_huyen = u'\u1ef2' # u'Ỳ'
-upper_y_hoi = u'\u1ef6'   # u'Ỷ'
-upper_y_nga = u'\u1ef8'   # u'Ỹ'
-upper_y_nang = u'\u1ef4'  # u'Ỵ'
+upper_y_ngang = 'Y'
+upper_y_sac = '\u00dd'   # 'Ý'
+upper_y_huyen = '\u1ef2' # 'Ỳ'
+upper_y_hoi = '\u1ef6'   # 'Ỷ'
+upper_y_nga = '\u1ef8'   # 'Ỹ'
+upper_y_nang = '\u1ef4'  # 'Ỵ'
 # y vowels
-lower_y_ngang = u'y'
-lower_y_sac = u'\u00fd'   # u'ý'
-lower_y_huyen = u'\u1ef3' # u'ỳ'
-lower_y_hoi = u'\u1ef7'   # u'ỷ'
-lower_y_nga = u'\u1ef9'   # u'ỹ'
-lower_y_nang = u'\u1ef5'  # u'ỵ'
+lower_y_ngang = 'y'
+lower_y_sac = '\u00fd'   # 'ý'
+lower_y_huyen = '\u1ef3' # 'ỳ'
+lower_y_hoi = '\u1ef7'   # 'ỷ'
+lower_y_nga = '\u1ef9'   # 'ỹ'
+lower_y_nang = '\u1ef5'  # 'ỵ'
 
 a = [upper_a_ngang, upper_a_sac, upper_a_huyen,
      upper_a_hoi, upper_a_nga, upper_a_nang,
@@ -246,7 +246,7 @@ o7 = [upper_oplus_ngang, upper_oplus_sac, upper_oplus_huyen,
 u = [upper_u_ngang, upper_u_sac, upper_u_huyen,
      upper_u_hoi, upper_u_nga, upper_u_nang,
      lower_u_ngang, lower_u_sac, lower_u_huyen,
-     lower_u_hoi, upper_u_nga, upper_u_nang]
+     lower_u_hoi, lower_u_nga, lower_u_nang]
 
 u7 = [upper_uplus_ngang, upper_uplus_sac, upper_uplus_huyen,
       upper_uplus_hoi, upper_uplus_nga, upper_uplus_nang,
@@ -258,19 +258,19 @@ y = [upper_y_ngang, upper_y_sac, upper_y_huyen,
      lower_y_ngang, lower_y_sac, lower_y_huyen,
      lower_y_hoi, lower_y_nga, lower_y_nang]
 
-viet_consonants_upper = [u'A', u'Ă', u'Â', u'B', u'C', u'Ch', u'D', u'Đ',
-                         u'E', u'Ê', u'G', u'Gh', u'Gi', u'H', u'I',
-                         u'K', u'Kh', u'L', u'M', u'N', u'Ng', u'Ngh', u'Nh',
-                         u'O', u'Ô', u'Ơ', u'P', u'Ph', u'Q', u'R',
-                         u'S', u'T', u'Th', u'Tr', u'U', u'Ư', u'V',
-                         u'X', u'Y', u'F', u'J', u'W', u'Z']
+viet_consonants_upper = ['A', 'Ă', 'Â', 'B', 'C', 'Ch', 'D', 'Đ',
+                         'E', 'Ê', 'G', 'Gh', 'Gi', 'H', 'I',
+                         'K', 'Kh', 'L', 'M', 'N', 'Ng', 'Ngh', 'Nh',
+                         'O', 'Ô', 'Ơ', 'P', 'Ph', 'Q', 'R',
+                         'S', 'T', 'Th', 'Tr', 'U', 'Ư', 'V',
+                         'X', 'Y', 'F', 'J', 'W', 'Z']
 
-viet_consonants_lower = [u'a', u'ă', u'â', u'b', u'c', u'ch', u'd', u'đ',
-                         u'e', u'ê', u'g', u'gh', u'gi', u'h', u'i',
-                         u'k', u'kh', u'l', u'm', u'n', u'ng', u'ngh', u'nh',
-                         u'o', u'ô', u'ơ', u'p', u'ph', u'q', u'r',
-                         u's', u't', u'th', u'tr', u'u', u'ư', u'v',
-                         u'x', u'y', u'f', u'j', u'w', u'z']
+viet_consonants_lower = ['a', 'ă', 'â', 'b', 'c', 'ch', 'd', 'đ',
+                         'e', 'ê', 'g', 'gh', 'gi', 'h', 'i',
+                         'k', 'kh', 'l', 'm', 'n', 'ng', 'ngh', 'nh',
+                         'o', 'ô', 'ơ', 'p', 'ph', 'q', 'r',
+                         's', 't', 'th', 'tr', 'u', 'ư', 'v',
+                         'x', 'y', 'f', 'j', 'w', 'z']
 
 viet_consonants = viet_consonants_upper + viet_consonants_lower
 viet_vowels = list(chain(*[a, a8, a6, e, e6, i, o, o6, o7, u, u7, y]))
@@ -286,19 +286,19 @@ vni_mappings = {'A8':a8[0], 'A81':a8[1], 'A82':a8[2], 'A83':a8[3], 'A84':a8[4], 
                 'o6':o6[6], 'o61':o6[7], 'o62':o6[8], 'o63':o6[9], 'o64':o6[10], 'o65':o6[11],
                 'O7':o7[0], 'O71':o7[1], 'O72':o7[2], 'O73':o7[3], 'O74':o7[4],  'O75':o7[5],
                 'o7':o7[6], 'o71':o7[7], 'o72':o7[8], 'o73':o7[9], 'o74':o7[10], 'o75':o7[11],
-                'U7':u7[0], 'U71':o7[1], 'U72':o7[2], 'U73':o7[3], 'U74':o7[4],  'U75':o7[5],
-                'u7':u7[6], 'u71':o7[7], 'u72':o7[8], 'u73':o7[9], 'u74':o7[10], 'u75':o7[11],
-                'D9': u'Đ', 'd9': u'đ',
+                'U7':u7[0], 'U71':u7[1], 'U72':u7[2], 'U73':u7[3], 'U74':u7[4],  'U75':u7[5],
+                'u7':u7[6], 'u71':u7[7], 'u72':u7[8], 'u73':u7[9], 'u74':u7[10], 'u75':u7[11],
+                'D9': 'Đ', 'd9': 'đ',
                 'A1':a[1], 'A2':a[2], 'A3':a[3], 'A4':a[4],  'A5':a[5],
                 'a1':a[7], 'a2':a[8], 'a3':a[9], 'a4':a[10], 'a5':a[11],
                 'E1':e[1], 'E2':e[2], 'E3':e[3], 'E4':e[4],  'E5':e[5],
                 'e1':e[7], 'e2':e[8], 'e3':e[9], 'e4':e[10], 'e5':e[11],
                 'I1':i[1], 'I2':i[2], 'I3':i[3], 'I4':i[4],  'I5':i[5],
                 'i1':i[7], 'i2':i[8], 'i3':i[9], 'i4':i[10], 'i5':i[11],
-                'O1':i[1], 'O2':i[2], 'O3':i[3], 'O4':i[4],  'O5':i[5],
-                'o1':i[7], 'o2':i[8], 'o3':i[9], 'o4':i[10], 'o5':i[11],
-                'U1':i[1], 'U2':i[2], 'U3':i[3], 'U4':i[4],  'U5':i[5],
-                'u1':i[7], 'u2':i[8], 'u3':i[9], 'u4':i[10], 'u5':i[11],
+                'O1':o[1], 'O2':o[2], 'O3':o[3], 'O4':o[4],  'O5':o[5],
+                'o1':o[7], 'o2':o[8], 'o3':o[9], 'o4':o[10], 'o5':o[11],
+                'U1':u[1], 'U2':u[2], 'U3':u[3], 'U4':u[4],  'U5':u[5],
+                'u1':u[7], 'u2':u[8], 'u3':u[9], 'u4':u[10], 'u5':u[11],
                 }
 
 
@@ -310,37 +310,57 @@ telex_mappings = {'Aw':a8[0], 'Aws':a8[1], 'Awf':a8[2], 'Awr':a8[3], 'Awx':a8[4]
                   'ee':e6[6], 'ees':e6[7], 'eef':e6[8], 'eer':e6[9], 'eex':e6[10], 'eej':e6[11],
                   'Oo':o6[0], 'Oos':o6[1], 'Oof':o6[2], 'Oor':o6[3], 'Oox':o6[4],  'Ooj':o6[5],
                   'oo':o6[6], 'oos':o6[7], 'oof':o6[8], 'oor':o6[9], 'oox':o6[10], 'ooj':o6[11],
-                  'Ow':o7[0], 'Oos':o7[1], 'Oof':o7[2], 'Owr':o7[3], 'Owx':o7[4],  'Owj':o7[5],
-                  'ow':o7[6], 'ows':o7[7], 'oof':o7[8], 'owr':o7[9], 'owx':o7[10], 'owj':o7[11],
-                  'Uw':u7[0], 'Uws':o7[1], 'Uwf':o7[2], 'Uwr':o7[3], 'Uwx':o7[4],  'Uwj':o7[5],
-                  'uw':u7[6], 'uws':o7[7], 'uwf':o7[8], 'uwr':o7[9], 'uwx':o7[10], 'uwj':o7[11],
-                  'Dd': u'Đ', 'dd': u'đ',
+                  'Ow':o7[0], 'Ows':o7[1], 'Owf':o7[2], 'Owr':o7[3], 'Owx':o7[4],  'Owj':o7[5],
+                  'ow':o7[6], 'ows':o7[7], 'owf':o7[8], 'owr':o7[9], 'owx':o7[10], 'owj':o7[11],
+                  'Uw':u7[0], 'Uws':u7[1], 'Uwf':u7[2], 'Uwr':u7[3], 'Uwx':u7[4],  'Uwj':u7[5],
+                  'uw':u7[6], 'uws':u7[7], 'uwf':u7[8], 'uwr':u7[9], 'uwx':u7[10], 'uwj':u7[11],
+                  'Dd': 'Đ', 'dd': 'đ',
                   'As':a[1], 'Af':a[2], 'Ar':a[3], 'Ax':a[4],  'Aj':a[5],
                   'as':a[7], 'af':a[8], 'ar':a[9], 'ax':a[10], 'aj':a[11],
                   'Es':e[1], 'Ef':e[2], 'Er':e[3], 'Ex':e[4],  'Ej':e[5],
                   'es':e[7], 'ef':e[8], 'er':e[9], 'ex':e[10], 'ej':e[11],
                   'Is':i[1], 'If':i[2], 'Ir':i[3], 'Ix':i[4],  'Ij':i[5],
                   'is':i[7], 'if':i[8], 'ir':i[9], 'ix':i[10], 'ij':i[11],
-                  'Os':i[1], 'Of':i[2], 'Or':i[3], 'Ox':i[4],  'Oj':i[5],
-                  'os':i[7], 'of':i[8], 'or':i[9], 'ox':i[10], 'oj':i[11],
-                  'Us':i[1], 'Uf':i[2], 'Ur':i[3], 'Ux':i[4],  'Uj':i[5],
-                  'us':i[7], 'uf':i[8], 'ur':i[9], 'ux':i[10], 'uj':i[11],
+                  'Os':o[1], 'Of':o[2], 'Or':o[3], 'Ox':o[4],  'Oj':o[5],
+                  'os':o[7], 'of':o[8], 'or':o[9], 'ox':o[10], 'oj':o[11],
+                  'Us':u[1], 'Uf':u[2], 'Ur':u[3], 'Ux':u[4],  'Uj':u[5],
+                  'us':u[7], 'uf':u[8], 'ur':u[9], 'ux':u[10], 'uj':u[11],
 
                 }
 
 def viet_ime(s, mapping='vni', raise_keyerror=False):
+    """Convert an input-method-encoded ASCII string ``s`` to Vietnamese.
+
+    Parameters
+    ----------
+    s : str
+        Text containing IME escapes (e.g. ``'Nguye64n'`` for VNI,
+        ``'Nguyeefn'`` for Telex).
+    mapping : {'vni', 'telex'}
+        Which IME scheme to decode. VNI uses digit suffixes on a letter
+        (``a1`` → ``á``, ``a62`` → ``ầ``); Telex uses letter pairs
+        (``aa`` → ``â``, ``as`` → ``á``).
+    raise_keyerror : bool
+        VNI only. If True, an unknown escape like ``'u8'`` raises
+        :class:`KeyError`. If False (default), unknown escapes pass through.
+
+    Returns
+    -------
+    str
+        The decoded text. Characters outside any escape are preserved.
+    """
     if mapping == 'vni':
         _mapping = vni_mappings
-        _pattern = r'[A-Za-z]\d+'
         if raise_keyerror:
-            return re.sub(r'[A-Za-z]\d+',lambda m: _mapping[m.group(0)], s)
+            return re.sub(r'[A-Za-z]\d+', lambda m: _mapping[m.group(0)], s)
         else:
-            return re.sub(r'[A-Za-z]\d+',lambda m: _mapping.get(m.group(0), m.group(0)),s)
+            return re.sub(r'[A-Za-z]\d+', lambda m: _mapping.get(m.group(0), m.group(0)), s)
     elif mapping == 'telex':
         _mapping = telex_mappings
         _pattern = '|'.join(re.escape(word) for word in
                             sorted(_mapping, key=len, reverse=True))
-        return re.sub(_pattern, lambda match:telex_mappings[match.group()], s)
+        return re.sub(_pattern, lambda match: telex_mappings[match.group()], s)
+    raise ValueError(f"mapping must be 'vni' or 'telex', got {mapping!r}")
 
 
 # Shield the top level imports from all the local variables.

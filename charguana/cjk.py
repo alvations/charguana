@@ -7,66 +7,68 @@ Character Vommitting. See https://goo.gl/MxONLX
 import re
 import os
 
-cjk_unified_part1 = u'\u4E00', u'\u62FF'
-cjk_unified_part2 = u'\u6300', u'\u77FF'
-cjk_unified_part3 = u'\u7800', u'\u8CFF'
-cjk_unified_part4 = u'\u8D00', u'\u9FFF'
+cjk_unified_part1 = '\u4E00', '\u62FF'
+cjk_unified_part2 = '\u6300', '\u77FF'
+cjk_unified_part3 = '\u7800', '\u8CFF'
+cjk_unified_part4 = '\u8D00', '\u9FFF'
 
-cjk_unified_ext_a = u'\u3400', u'\u4DBF'
-cjk_unified_ext_b_part1 = u'\U00020000', u'\U000215FF'
-cjk_unified_ext_b_part2 = u'\U00021600', u'\U000230FF'
-cjk_unified_ext_b_part3 = u'\U00023100', u'\U000245FF'
-cjk_unified_ext_b_part4 = u'\U00024600', u'\U000260FF'
-cjk_unified_ext_b_part5 = u'\U00026100', u'\U000275FF'
-cjk_unified_ext_b_part6 = u'\U00027600', u'\U000290FF'
-cjk_unified_ext_b_part7 = u'\U00029100', u'\U0002A6DF'
-cjk_unified_ext_c = u'\U0002A700', u'\U0002B73F'
-cjk_unified_ext_d = u'\U0002B740', u'\U0002B81F'
-cjk_unified_ext_e = u'\U0002B820', u'\U0002CEAF'
+cjk_unified_ext_a = '\u3400', '\u4DBF'
+cjk_unified_ext_b_part1 = '\U00020000', '\U000215FF'
+cjk_unified_ext_b_part2 = '\U00021600', '\U000230FF'
+cjk_unified_ext_b_part3 = '\U00023100', '\U000245FF'
+cjk_unified_ext_b_part4 = '\U00024600', '\U000260FF'
+cjk_unified_ext_b_part5 = '\U00026100', '\U000275FF'
+cjk_unified_ext_b_part6 = '\U00027600', '\U000290FF'
+cjk_unified_ext_b_part7 = '\U00029100', '\U0002A6DF'
+cjk_unified_ext_c = '\U0002A700', '\U0002B73F'
+cjk_unified_ext_d = '\U0002B740', '\U0002B81F'
+cjk_unified_ext_e = '\U0002B820', '\U0002CEAF'
 
-cjk_radicals_supplements = u'\u2E80', u'\u2EFF'
-kangxi_radicals = u'\u2F00', u'\u2FDF'
-ideographic_desciption_chars = u'\u2FF0', u'\u2FFF'
-cjk_symbols_punctuations = u'\u3000', u'\u303F'
-cjk_strokes = u'\u31C0', u'\u31EF'
-enclosed_cjk_letters_months = u'\u3200', u'\u32FF'
+cjk_radicals_supplements = '\u2E80', '\u2EFF'
+kangxi_radicals = '\u2F00', '\u2FDF'
+ideographic_description_chars = '\u2FF0', '\u2FFF'
+ideographic_desciption_chars = ideographic_description_chars  # back-compat alias (typo)
+cjk_symbols_punctuations = '\u3000', '\u303F'
+cjk_strokes = '\u31C0', '\u31EF'
+enclosed_cjk_letters_months = '\u3200', '\u32FF'
 
-cjk_compat = u'\u3300', u'\u33FF'
-cjk_compat_ideographs = u'\uF900', u'\uFAFF'
-cjk_compat_forms = u'\uFE30', u'\uFE4F'
-enclosed_ideograph_supplement = u'\U0001F200', u'\U0001F2FF'
-cjk_compat_ideographs_supplement = u'\U0002F800', u'\U0002FA1F'
+cjk_compat = '\u3300', '\u33FF'
+cjk_compat_ideographs = '\uF900', '\uFAFF'
+cjk_compat_forms = '\uFE30', '\uFE4F'
+enclosed_ideograph_supplement = '\U0001F200', '\U0001F2FF'
+cjk_compat_ideographs_supplement = '\U0002F800', '\U0002FA1F'
 
-hiragana =  u'\u3040', u'\u309F'
-katakana =  u'\u30A0', u'\u30FF'
-romanji =   u'\uFF00', u'\uFFEF' # Romanji with half-width katakan.
+hiragana =  '\u3040', '\u309F'
+katakana =  '\u30A0', '\u30FF'
+romanji =   '\uFF00', '\uFFEF' # Romanji with half-width katakan.
 
 # Hangul syllables.
-hangul_syllables =   u'\uAC00', u'\uD7AF'
-hangul_syllables_assigned =   u'\uAC00', u'\uD7A3'
+hangul_syllables =   '\uAC00', '\uD7AF'
+hangul_syllables_assigned =   '\uAC00', '\uD7A3'
 # Hangul Jamos.
-hangul_jamo = u'\u1100', u'\u11FF'
-hangul_jamo_modern_1 = u'\u1100', u'\u1112'
-hangul_jamo_modern_2 = u'\u1161', u'\u1175'
-hangul_jamo_modern_3 = u'\u11A8', u'\u11C2'
-hangule_jamo_modern_all = [hangul_jamo_modern_1,
-                           hangul_jamo_modern_2,
-                           hangul_jamo_modern_3]
+hangul_jamo = '\u1100', '\u11FF'
+hangul_jamo_modern_1 = '\u1100', '\u1112'
+hangul_jamo_modern_2 = '\u1161', '\u1175'
+hangul_jamo_modern_3 = '\u11A8', '\u11C2'
+hangul_jamo_modern_all = [hangul_jamo_modern_1,
+                          hangul_jamo_modern_2,
+                          hangul_jamo_modern_3]
+hangule_jamo_modern_all = hangul_jamo_modern_all  # back-compat alias (typo)
 # HCJ
-hangul_compat_jamo = u'\u3130', u'\u318F'
-hangul_compat_jamo_assigned = u'\u3131', u'\u318E'
+hangul_compat_jamo = '\u3130', '\u318F'
+hangul_compat_jamo_assigned = '\u3131', '\u318E'
 hangul_compat_jamo_assigned_all = [hangul_compat_jamo_assigned]
-hangul_compat_jamo_modern_1 = u'\u3131', u'\u314E'
-hangul_compat_jamo_modern_b = u'\u314F', u'\u3163'
+hangul_compat_jamo_modern_1 = '\u3131', '\u314E'
+hangul_compat_jamo_modern_b = '\u314F', '\u3163'
 hangul_compat_jamo_modern_all = [hangul_compat_jamo_modern_1,
                                  hangul_compat_jamo_modern_b]
-hangul_compat_jamo_invalid = u'\u3164'
+hangul_compat_jamo_invalid = '\u3164'
 # Hangul extensions
-hangul_jamo_ext_a =  u'\uA960', u'\uA97F'
-hangul_jamo_ext_a_assigned =  u'\uA960', u'\uA97C'
-hangul_jamo_ext_b =  u'\uD7B0', u'\uD7FF'
-hangul_jamo_ext_b_assigned_1 =  u'\uD7B0', u'\uD7C6'
-hangul_jamo_ext_b_assigned_2 =  u'\uD7CB', u'\uD7FB'
+hangul_jamo_ext_a =  '\uA960', '\uA97F'
+hangul_jamo_ext_a_assigned =  '\uA960', '\uA97C'
+hangul_jamo_ext_b =  '\uD7B0', '\uD7FF'
+hangul_jamo_ext_b_assigned_1 =  '\uD7B0', '\uD7C6'
+hangul_jamo_ext_b_assigned_2 =  '\uD7CB', '\uD7FB'
 # All assigned jamo
 hangul_jamo_assigned_all = [hangul_jamo,
                             hangul_jamo_ext_a_assigned,
@@ -74,8 +76,8 @@ hangul_jamo_assigned_all = [hangul_jamo,
                             hangul_jamo_ext_b_assigned_2]
 
 # From https://en.wikipedia.org/wiki/Bopomofo
-bopomofo = u'\u3100', u'\u312F'
-bopomofo_ext = u'\u31A0', u'\u31BF'
+bopomofo = '\u3100', '\u312F'
+bopomofo_ext = '\u31A0', '\u31BF'
 
 # All UTF-8 Chinese character sets.
 # From https://en.wikipedia.org/wiki/CJK_Unified_Ideographs_(Unicode_block)

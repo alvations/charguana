@@ -3,15 +3,30 @@ Charguana
 
 A library for *"character vommitting"*.
 
-Only works in `Python3`
+Works on Python 3.10+ (tested through 3.14).
 
 
 Install
 ====
 
 ```bash
-pip3 install charguana
+pip install charguana
 ```
+
+### What's new in 0.2.0
+
+- `get_charset(name)` now returns a **list** instead of a generator. Use
+  `iter_charset(name)` if you want the old lazy behavior.
+- `all_in_charset(string, charset)` added alongside `islang` — the former
+  requires every character to match; `islang` remains "any character
+  matches".
+- `is_in_charsets(ch, ranges)` is now exposed at the top level (previously
+  only in `charguana.korean`).
+- `perluniprops` props (`IsAlpha`, `IsAlnum`, `IsLower`, `IsUpper`, `IsSo`)
+  and `chinese_strokes` are now loaded lazily on first access, so
+  `import charguana` is cheap.
+- Multiple Vietnamese IME bug fixes (VNI `U7*`, `O1..5`, `U1..5`; Telex
+  `Uws/Owf/Os/Us` families previously produced the wrong vowel).
 
 
 Usage
@@ -44,14 +59,14 @@ Usage
 
 
 # Chinese.
->>> from charguana import tradify, simplify
->>> ''.join(list(get_charset('chinese'))) == ''.join(list(get_charset('zh')))
+>>> from charguana import tradify, simplify, chinese_strokes
+>>> get_charset('chinese') == get_charset('zh')
 True
->>> ''.join(list(get_charset('zh'))) == ''.join(list(get_charset('cn')))
+>>> get_charset('zh') == get_charset('cn')
 True
->>> list(get_charset('simplified_chinese'))[:10]
+>>> get_charset('simplified_chinese')[:10]
 ['锕', '皑', '蔼', '碍', '爱', '嗳', '嫒', '瑷', '暧', '霭']
->>> list(get_charset('traditional_chinese'))[:10]
+>>> get_charset('traditional_chinese')[:10]
 ['錒', '皚', '藹', '礙', '愛', '噯', '嬡', '璦', '曖', '靄']
 >>> simplify('錒')
 '锕'
